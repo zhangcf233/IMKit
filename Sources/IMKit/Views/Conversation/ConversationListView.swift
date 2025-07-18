@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct IMMainView: View {
-    @Environment(\.imConfig) var config
-    
+struct SwiftUIView: View {
     var body: some View {
-        Text("Hello, IM! \(config.domain)")
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
+#Preview {
+    SwiftUIView()
+}

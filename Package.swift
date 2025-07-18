@@ -14,13 +14,23 @@ let package = Package(
             name: "IMKit",
             targets: ["IMKit"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://gitee.com/zhang_chao_fu/CommonKit.git", from: "0.2.26"),
+    ],
     targets: [
         .target(
             name: "IMKit",
-            dependencies: [],
+            dependencies: [
+                "CommonKit"
+            ],
             resources: [
-                .process("Resources")
+                
+            ]
+        ),
+        .testTarget(
+            name: "IMKitTests",
+            dependencies: [
+                "IMKit"
             ]
         )
     ]

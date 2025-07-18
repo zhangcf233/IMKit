@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "D77CA6E4-606F-494A-BDA9-76EB01733C3A",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "IMKitTests",
+        "name" : "IMKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
