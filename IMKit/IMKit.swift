@@ -7,3 +7,10 @@
 
 import Foundation
 
+public class IMKit {
+
+    /// 测试方法
+    public func test(){
+        print("hello IM")
+    }
+}
