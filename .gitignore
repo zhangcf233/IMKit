@@ -1,0 +1,66 @@
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode 自动生成
+*.xcuserstate
+*.xcworkspace
+*.xcscmblueprint
+*.xccheckout
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+xcuserdata/
+
+# 构建产物
+build/
+DerivedData/
+*.ipa
+*.dSYM
+*.app
+
+# SwiftPM（如果有使用 Swift Package Manager）
+.swiftpm/
+.build/
+Package.resolved
+
+# Logs & 临时文件
+*.log
+*.swp
+*.swo
+*.tmp
+
+# Playground
+timeline.xctimeline
+playground.xcworkspace
+
+# Cocoapods（如有）
+Pods/
+Podfile.lock
+
+# Carthage（如有）
+Carthage/
+
+# Fastlane（如有）
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Xcode 自动生成的设备支持文件
+*.xcuserdatad/
+
+# 媒体缓存
+*.m4a
+*.mp3
+*.mov
+*.mp4
+
+# Test snapshot（如用 Snapshot 测试）
+__Snapshots__
+
+# 如果你使用 Git Submodules
+.gitmodules
+
+# 如果你使用 Xcode Cloud
+xcshareddata/xcschemes/*-CI.xcscheme
