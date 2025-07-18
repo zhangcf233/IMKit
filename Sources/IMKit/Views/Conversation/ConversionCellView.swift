@@ -21,8 +21,13 @@ struct ConversionCellView: View {
             // 头像
             avatar
             // 右侧内容
+            content
         }
-        
+        .padding(.horizontal)
+        .padding(.vertical,5)
+        .listRowInsets(EdgeInsets())
+        .listRowSeparator(.hidden)
+        .contentShape(Rectangle())
     }
     
     var avatar:some View {
@@ -32,12 +37,26 @@ struct ConversionCellView: View {
     }
     
     var content:some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading,spacing: 8) {
             HStack{
                 // 名称
+                Text(conversion.name)
+                    .font(.headline)
+                
+                Spacer()
                 
                 // 时间
+                Text(conversion.lastMessageTime.formattedDisplayTime())
+                    .font(.footnote)
+                    .opacity(0.3)
             }
+            
+            
+            /// 消息内容
+            Text(conversion.lastMessage)
+                .font(.subheadline)
+                .opacity(0.6)
+                .lineLimit(1)
         }
     }
 }

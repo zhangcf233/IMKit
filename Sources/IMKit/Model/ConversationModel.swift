@@ -28,10 +28,10 @@ public struct Conversation:Identifiable,Codable,Hashable {
     public let avatar: URL
 
     /// 最近一条消息摘要
-    public let lastMessage: String?
+    public let lastMessage: String
 
     /// 最近消息的时间（用于排序）
-    public let lastMessageTime: Date?
+    public let lastMessageTime: Date
 
     /// 未读消息数量
     public var unreadCount: Int
@@ -49,8 +49,8 @@ public struct Conversation:Identifiable,Codable,Hashable {
         name: String,
         unreadCount: Int,
         avatar: URL,
-        lastMessage: String?,
-        lastMessageTime: Date?,
+        lastMessageTime: Date,
+        lastMessage: String,
         isTop: Bool? = false,
         draft: String? = nil
     ) {
@@ -73,11 +73,11 @@ public struct Conversation:Identifiable,Codable,Hashable {
 let DefaultConversation = Conversation(
     id: "u_2",
     type: .single,
-    name: "张三",
+    name: "王五",
     unreadCount: 2,
     avatar: DefaultAvatar,
-    lastMessage:  "最近好吗？",
     lastMessageTime:Date(),
+    lastMessage:  "最近好吗？",
 )
 
 /// 置顶消息
@@ -87,7 +87,12 @@ let DefaultTopConversion = Conversation(
     name: "张三",
     unreadCount: 2,
     avatar: DefaultAvatar,
-    lastMessage:  "最近好吗？",
     lastMessageTime:Date(),
+    lastMessage:  "最近好吗？",
     isTop: true
 )
+
+let DefaultConversions = [
+    DefaultConversation,
+    DefaultTopConversion
+]
