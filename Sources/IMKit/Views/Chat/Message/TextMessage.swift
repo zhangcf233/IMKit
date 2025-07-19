@@ -7,12 +7,34 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+/// MARK: 文字类型消息
+struct TextMessageView: View {
+    init(_ message: Message) {
+        self.message = message
     }
+    
+    var isSender:Bool {
+        return message.isSender
+    }
+    
+    let message:Message
+    
+    var body: some View {
+        Text(message.content)
+            .padding(5)
+            .foregroundStyle(isSender ? .white : .black )
+            .background(isSender ? .blue  : .gray.opacity(0.2) )
+            .cornerRadius(10)
+    }
+    
 }
 
 #Preview {
-    SwiftUIView()
+    TextMessageView(msg1)
+    
+    TextMessageView(msg2)
+    
+    TextMessageView(msgLong)
+    
+    TextMessageView(msgLongMine)
 }

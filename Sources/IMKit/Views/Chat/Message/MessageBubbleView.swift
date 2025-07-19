@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+struct MessageBubbleView: View {
+    init(_ message: Message) {
+        self.message = message
+    }
+    let message:Message
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        switch message.type {
+        case .text:
+            TextMessageView(message)
+        }
     }
 }
 
 #Preview {
-    SwiftUIView()
+    MessageBubbleView(msg1)
 }
