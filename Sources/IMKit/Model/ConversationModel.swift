@@ -74,7 +74,7 @@ let DefaultConversation = Conversation(
     id: "u_1",
     type: .single,
     name: "王五",
-    unreadCount: 2,
+    unreadCount: 1,
     avatar: DefaultAvatar,
     lastMessageTime:Date(),
     lastMessage:  "这是一条很长很长很长很长很长很长很长很长很长很长的消息",
@@ -85,7 +85,7 @@ let DefaultTopConversion = Conversation(
     id: "u_2",
     type: .single,
     name: "张三",
-    unreadCount: 2,
+    unreadCount: 100,
     avatar: DefaultAvatar,
     lastMessageTime:Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
     lastMessage:  "这是一条昨天的消息",
@@ -104,8 +104,20 @@ let DefaultConversion2 = Conversation(
     isTop: true
 )
 
+/// 置顶消息
+let DefaultConversion3 = Conversation(
+    id: "u_4",
+    type: .single,
+    name: "这个好友的昵称非常非常非常非常非常非常非常非常非常长",
+    unreadCount: 21,
+    avatar: DefaultAvatar,
+    lastMessageTime:Calendar.current.date(byAdding: .day, value: -3, to: Date())!,
+    lastMessage:  "这是一条很长很长很长很长很长很长很长很长很长很长的消息",
+)
+
 let DefaultConversions = [
     DefaultConversation,
     DefaultTopConversion,
-    DefaultConversion2
+    DefaultConversion2,
+    DefaultConversion3
 ]

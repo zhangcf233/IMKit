@@ -38,7 +38,7 @@ struct ConversionCellView: View {
         onlineImg(conversion.avatar)
             .frame(width: avatarSize,height: avatarSize)
             .cornerRadius(avatarSize)
-            
+            .useBadge(conversion.unreadCount)
     }
     
     var content:some View {
