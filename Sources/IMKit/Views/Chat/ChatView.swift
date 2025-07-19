@@ -6,16 +6,31 @@
 //
 
 import SwiftUI
+import CommonKit
 
 struct ChatView:View {
+    
+    @State var text = ""
+    @State var isFocused = true
+    
     var body:some View {
         VStack(spacing:0){
             ChatHeaderView()
-            Divider()
-            ChatContentView()
+                .background(.gray.opacity(0.2))
             
-            ChatInputView()
+            Divider()
+            
+            ChatContentView()
+                .onTapGesture {
+                    isFocused = false
+                }
+            
+            ChatInputView(
+                $text,
+                $isFocused
+            )
         }
+        .hiddenNavigationBarSpace()
     }
 }
 

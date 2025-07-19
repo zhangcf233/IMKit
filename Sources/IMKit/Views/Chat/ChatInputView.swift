@@ -9,10 +9,24 @@ import SwiftUI
 
 struct ChatInputView:View {
     
-    @State var text = ""
+    init(
+        _ text:Binding<String>,
+        _ isFocused:Binding<Bool>,
+        
+    ) {
+        _text = Binding(projectedValue: text)
+        _isFocused = Binding(projectedValue: isFocused)
+        
+    }
+    /// 文本内容
+    @Binding var text:String
+    
+    /// 焦点控制
+    @Binding var isFocused:Bool
     
     /// 是否要底部对齐
     @State var needAlignmentBottom = false
+    
     
     var body: some View {
         HStack(alignment:needAlignmentBottom ?.bottom : .center,spacing: 0) {
@@ -21,7 +35,7 @@ struct ChatInputView:View {
             cameraBtn
             
             /// 输入框
-            AutoGrowingField($text){ old,new in
+            AutoGrowingField($text,$isFocused){ old,new in
                 needAlignmentBottom = old != new
             }
             
@@ -32,7 +46,7 @@ struct ChatInputView:View {
         .padding(4)
         .background(.ultraThinMaterial)
         .cornerRadius(20)
-        .padding(.horizontal)
+        .padding(8)
     }
     
     /// 相机按钮
@@ -108,6 +122,10 @@ struct ChatInputView:View {
 }
 
 #Preview {
-    
-    ChatInputView()
+    @State var text = ""
+    @State var isFocused  = false
+    ChatInputView(
+        $text,
+        $isFocused
+    )
 }

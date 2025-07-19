@@ -26,7 +26,7 @@ let package = Package(
                 "NavigationViewKit"
             ],
             resources: [
-                
+                .process("Resources")
             ]
         ),
         .testTarget(

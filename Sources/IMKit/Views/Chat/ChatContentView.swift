@@ -10,11 +10,15 @@ import SwiftUI
 struct ChatContentView: View {
     var body: some View {
         ScrollView {
-            Text("这里有很多聊天记录")
-            Text("这里有很多聊天记录")
-            Text("这里有很多聊天记录")
-            Text("这里有很多聊天记录")
-            Text("这里有很多聊天记录")
+            VStack{
+                ForEach(1...100,id:\.self){ _ in
+                    HStack{
+                        Spacer()
+                        Text("这里有很多聊天记录")
+                    }
+                }
+                Spacer()
+            }
         }
     }
 }

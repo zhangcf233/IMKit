@@ -30,7 +30,6 @@ struct ChatHeaderView: View {
             right
         }
         .padding(.vertical,5)
-        .background(.clear)
         
     }
     
