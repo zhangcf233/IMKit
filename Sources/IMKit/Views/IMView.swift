@@ -17,11 +17,16 @@ struct IMView: View {
     
     var body: some View {
         NavigationView {
-            ConversitionView(conversions:vm.filteredConversations)
+            ConversitionView(vm.filteredConversations)
                 .navigationBarTitle(Text("消息"))
                 .navigationBarTitleDisplayMode(.inline)
-                .searchable(text: $vm.searchConversion, placement: .navigationBarDrawer)
+                .searchable(
+                    text: $vm.searchConversion,
+                    placement: .navigationBarDrawer
+                )
+                
         }
+        .useRoute(vm.config.routeFlag)
     }
 }
 

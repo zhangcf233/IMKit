@@ -16,12 +16,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://gitee.com/zhang_chao_fu/CommonKit.git", from: "0.2.26"),
+        .package(url: "https://github.com/fatbobman/NavigationViewKit", from: "0.0.5")
     ],
     targets: [
         .target(
             name: "IMKit",
             dependencies: [
-                "CommonKit"
+                "CommonKit",
+                "NavigationViewKit"
             ],
             resources: [
                 

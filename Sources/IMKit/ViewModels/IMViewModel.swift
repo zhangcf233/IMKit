@@ -24,11 +24,18 @@ class IMViewModel:BaseViewModel {
     
     /// 过滤搜索内容
     var filteredConversations: [Conversation] {
-        if searchConversion.isEmpty {
-            return conversions
-        } else {
-            return filterSearch()
-        }
+        
+        let result = searchConversion.isEmpty ? conversions : filterSearch()
+        
+        return result.sorted { a, b in
+            // 优先排置顶数据
+            if a.isTop != b.isTop {
+                return a.isTop && !b.isTop
+            }else {
+                // 再按时间排序
+                return a.lastMessageTime > b.lastMessageTime
+            }
+    }
     }
     
     /// 搜索过滤方法

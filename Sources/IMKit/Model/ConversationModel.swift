@@ -37,7 +37,7 @@ public struct Conversation:Identifiable,Codable,Hashable {
     public var unreadCount: Int
 
     /// 是否置顶
-    public var isTop: Bool?
+    public var isTop: Bool
 
     /// 草稿消息（未发送内容）
     public var draft: String?
@@ -51,7 +51,7 @@ public struct Conversation:Identifiable,Codable,Hashable {
         avatar: URL,
         lastMessageTime: Date,
         lastMessage: String,
-        isTop: Bool? = false,
+        isTop: Bool = false,
         draft: String? = nil
     ) {
         self.id = id
@@ -71,13 +71,13 @@ public struct Conversation:Identifiable,Codable,Hashable {
 
 /// 示例消息
 let DefaultConversation = Conversation(
-    id: "u_2",
+    id: "u_1",
     type: .single,
     name: "王五",
     unreadCount: 2,
     avatar: DefaultAvatar,
     lastMessageTime:Date(),
-    lastMessage:  "最近好吗？",
+    lastMessage:  "这是一条很长很长很长很长很长很长很长很长很长很长的消息",
 )
 
 /// 置顶消息
@@ -87,12 +87,25 @@ let DefaultTopConversion = Conversation(
     name: "张三",
     unreadCount: 2,
     avatar: DefaultAvatar,
-    lastMessageTime:Date(),
-    lastMessage:  "最近好吗？",
+    lastMessageTime:Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
+    lastMessage:  "这是一条昨天的消息",
+    isTop: true
+)
+
+/// 置顶消息
+let DefaultConversion2 = Conversation(
+    id: "u_3",
+    type: .single,
+    name: "这个好友的昵称非常非常非常非常非常非常非常非常非常长",
+    unreadCount: 2,
+    avatar: DefaultAvatar,
+    lastMessageTime:Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 9, minute: 0))!,
+    lastMessage:  "这是一条很长很长很长很长很长很长很长很长很长很长的消息",
     isTop: true
 )
 
 let DefaultConversions = [
     DefaultConversation,
-    DefaultTopConversion
+    DefaultTopConversion,
+    DefaultConversion2
 ]

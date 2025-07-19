@@ -15,6 +15,9 @@ struct ConversionCellView: View {
     }
     
     var conversion:Conversation
+    
+    let avatarSize = 50.0
+    
     var body: some View {
         
         HStack {
@@ -28,12 +31,14 @@ struct ConversionCellView: View {
         .listRowInsets(EdgeInsets())
         .listRowSeparator(.hidden)
         .contentShape(Rectangle())
+        .background(conversion.isTop ? .gray.opacity(0.1) : .clear)
     }
     
     var avatar:some View {
         onlineImg(conversion.avatar)
-            .frame(width: 55,height: 55)
-            .cornerRadius(55)
+            .frame(width: avatarSize,height: avatarSize)
+            .cornerRadius(avatarSize)
+            
     }
     
     var content:some View {
@@ -42,6 +47,7 @@ struct ConversionCellView: View {
                 // 名称
                 Text(conversion.name)
                     .font(.headline)
+                    .lineLimit(1)
                 
                 Spacer()
                 

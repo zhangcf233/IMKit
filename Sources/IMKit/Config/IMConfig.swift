@@ -34,6 +34,9 @@ open class IMConfig {
     // MARK:  可选扩展选项 开启开发者模式
     public let enableDebugLog:Bool
     
+    // MARK: 路由标记
+    public let routeFlag:String = UUID().uuidString
+    
 }
 
 
