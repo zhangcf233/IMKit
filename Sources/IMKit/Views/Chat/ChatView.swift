@@ -11,7 +11,7 @@ import CommonKit
 struct ChatView:View {
     
     @State var text = ""
-    @State var isFocused = true
+    @State var isFocused = false
     
     var body:some View {
         VStack(spacing:0){

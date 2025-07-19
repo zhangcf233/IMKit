@@ -80,7 +80,7 @@ struct ChatHeaderView: View {
     /// 信息按钮
     var infoBtn:some View {
         Button {
-            dismiss()
+            
         } label: {
             Image(systemName: "ellipsis")
                 .foregroundStyle(.black)
