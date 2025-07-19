@@ -12,3 +12,7 @@ struct ChatView:View {
         Text("聊天页面")
     }
 }
+
+#Preview {
+    ChatView()
+}
