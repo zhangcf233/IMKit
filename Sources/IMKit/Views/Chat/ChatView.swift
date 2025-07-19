@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ChatView:View {
     var body:some View {
-        Text("聊天页面")
+        VStack(spacing:0){
+            ChatHeaderView()
+            Divider()
+            ChatContentView()
+            
+            ChatInputView()
+        }
     }
 }
 
