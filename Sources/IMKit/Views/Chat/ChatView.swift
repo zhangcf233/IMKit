@@ -16,7 +16,6 @@ struct ChatView:View {
     var body:some View {
         VStack(spacing:0){
             ChatHeaderView()
-                .background(.gray.opacity(0.2))
             
             Divider()
             
