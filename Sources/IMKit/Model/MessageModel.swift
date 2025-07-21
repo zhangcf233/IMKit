@@ -93,5 +93,31 @@ let msgLong = Message(content: "这是一条收到的很长很长很长很长很
 let msgLongMine = Message(content: "这是一条自己发送的很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试消息", sender:sender1)
 
 let defalutMessages = [
-    msg1,msg2,msgLongName,msg1,msg2,msg1,msg2,msgLongName,msgLongName,msgLong,msgLongMine,msgLast
+    msg1,
+    msg2,
+    msgLongName,
+    msg1,
+    msg2,
+    msgLongName,
+    msg1,
+    msgLong,
+    msg2,
+    msgLongName,
+    msg1,
+    msgLong,
+    msg2,
+    msgLongName,
+    msg1,
+    msgLong,
+    msg2,
+    msgLongName,
+    msg1,
+    msg2,
+    msgLongName,
+    msg1,
+    msg2,
+    msgLongName,
+    msg1,
+    msg2,
+    msgLast
 ]
