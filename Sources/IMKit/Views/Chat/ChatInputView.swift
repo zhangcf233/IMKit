@@ -55,9 +55,8 @@ struct ChatInputView:View {
                 extendView
             }
             
-            
         }
-        .foregroundStyle(.black)
+        .foregroundStyle(.primary)
     }
     
     /// 相机按钮
@@ -85,7 +84,10 @@ struct ChatInputView:View {
         Button {
             vm.changeFace()
         } label: {
-            Image(systemName: "face.smiling")
+            Image("face", bundle: .module)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30)
         }
     }
     

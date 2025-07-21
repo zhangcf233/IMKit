@@ -72,7 +72,7 @@ struct ChatHeaderView: View {
             dismiss()
         } label: {
             Image(systemName: "chevron.left")
-                .foregroundStyle(.black)
+                .foregroundStyle(Color(.label))
         }
         .padding(.horizontal)
     }

@@ -22,8 +22,8 @@ struct TextMessageView: View {
     var body: some View {
         Text(message.content)
             .padding(8)
-            .foregroundStyle(isMine ? .white : .black )
-            .background(isMine ? .blue  : .gray.opacity(0.2) )
+            .foregroundStyle(isMine ? .white : .primary )
+            .background(isMine ? .blue  : Color(.systemGray6) )
             .cornerRadius(10)
     }
     
