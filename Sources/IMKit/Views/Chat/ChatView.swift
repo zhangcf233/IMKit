@@ -18,7 +18,10 @@ struct ChatView:View {
             
             Divider()
             
-            ChatContentView()
+            ChatContentView(
+                messages: $vm.messages,
+                isScrollToBottom: $vm.isScrollToBottom
+            )
                 .onTapGesture {
                     vm.onTapContent()
                 }

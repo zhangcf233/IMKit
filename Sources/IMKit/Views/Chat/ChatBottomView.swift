@@ -18,10 +18,10 @@ struct ChatBottomView: View {
             ChatInputView(vm: vm)
             
             /// 扩展栏
-            ChatExtendView($vm.openExtend)
+            ChatExtendView($vm.isOpenExtend)
             
             /// 表情栏
-            ChatFaceView($vm.openFace)
+            ChatFaceView($vm.isOpenFace)
         }
     }
 }

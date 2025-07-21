@@ -43,7 +43,6 @@ struct MessageView: View {
                 
             }
         }
-        .padding(.horizontal)
     }
     
     var center:some View {

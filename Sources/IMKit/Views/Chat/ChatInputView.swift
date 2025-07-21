@@ -15,6 +15,7 @@ struct ChatInputView:View {
     /// 是否要底部对齐
     @State var needAlignmentBottom = false
     
+    
     var body: some View {
         HStack(alignment:needAlignmentBottom ?.bottom : .center,spacing: 0) {
             
@@ -36,15 +37,7 @@ struct ChatInputView:View {
         .padding(8)
     }
     
-    /// 相机按钮
-    var cameraBtn: some View {
-        Button {
-            onTapCamera()
-        } label: {
-            Image(systemName: "camera.circle.fill")
-                .foregroundStyle(.blue)
-        }
-    }
+    
     
     /// 右侧功能视图
     var rightView:some View {
@@ -53,10 +46,28 @@ struct ChatInputView:View {
 //            voiceView
             /// 表情
             faceView
-            /// 扩展功能
-            extendView
+            
+            /// 发送按钮
+            if vm.isShowSendBtn {
+                sendBtn
+            } else {
+                /// 扩展功能
+                extendView
+            }
+            
+            
         }
         .foregroundStyle(.black)
+    }
+    
+    /// 相机按钮
+    var cameraBtn: some View {
+        Button {
+            onTapCamera()
+        } label: {
+            Image(systemName: "camera.circle.fill")
+                .foregroundStyle(.blue)
+        }
     }
     
     /// 语音按钮
@@ -84,7 +95,28 @@ struct ChatInputView:View {
             vm.changeExtend()
         } label: {
             Image(systemName: "plus.circle")
-                .rotationEffect(Angle.degrees(vm.openExtend ? 45 : 0))
+                .rotationEffect(Angle.degrees(vm.isOpenExtend ? 45 : 0))
+        }
+    }
+    
+    /// 发送消息按钮
+    var sendBtn:some View {
+        Button {
+            vm.onSendText()
+        } label: {
+            
+            ZStack{
+                Image(systemName: "paperplane.fill")
+                    .foregroundStyle(.white)
+                    .font(.system(size: 20))
+                    .rotationEffect(Angle(degrees: 15))
+            }
+            .frame(width: vm.isShowSendBtn ? 30 : 0,height: 30)
+                .padding(.horizontal,vm.isShowSendBtn ? 10 : 0)
+                .background(.pink)
+                .cornerRadius(50)
+                .clipped()
+            
         }
     }
     
@@ -98,4 +130,9 @@ struct ChatInputView:View {
         
     }
     
+}
+
+#Preview {
+    @StateObject var vm = ChatViewModel()
+    ChatInputView(vm: vm)
 }

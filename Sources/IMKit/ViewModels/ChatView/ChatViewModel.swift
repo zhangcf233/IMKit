@@ -17,20 +17,79 @@ public class ChatViewModel:BaseViewModel{
     @Published var isFocused = false
     
     /// 扩展栏
-    @Published var openExtend = false
+    @Published var isOpenExtend = false
     
     /// 表情栏
-    @Published var openFace = false
+    @Published var isOpenFace = false
+    
+    /// 发送按钮
+    @Published var isShowSendBtn = false
+    
+    /// 聊天记录滚动到底部状态
+    @Published var isScrollToBottom = false
+    
+    /// 聊天记录
+    @Published var messages:[Message] = defalutMessages
+    
     
 }
 
 extension ChatViewModel {
+    
+    /// 输入文字
+    func onInput(val:String){
+        if val.isEmpty{
+            closeSendBtn()
+        }else {
+            showSendBtn()
+        }
+        
+    }
+    
+    /// 发送消息
+    func onSendText(){
+        withAnimation {
+            
+            messages.append(Message(content: text, sender: sender1))
+            
+            
+            text = ""
+        }
+        
+    }
+    
+    /// 显示消息按钮
+    func showSendBtn(){
+        withAnimation {
+            if !isShowSendBtn {
+                isShowSendBtn.toggle()
+            }
+        }
+    }
+    
+    /// 隐藏消息按钮
+    func closeSendBtn(){
+        withAnimation {
+            if isShowSendBtn {
+                isShowSendBtn.toggle()
+            }
+        }
+    }
     
     /// 点击聊天记录内容
     func onTapContent(){
         cancelFocus()
         closeFace()
         closeExtend()
+    }
+    
+    /// 焦点变化钩子
+    func onFocusChange(_ val:Bool){
+        if val {
+            closeFace()
+            closeExtend()
+            scrollToBottom()
+        }
     }
     
     /// 切换焦点
@@ -53,15 +112,18 @@ extension ChatViewModel {
     func changeExtend(){
         closeFace()
         withAnimation {
-            openExtend.toggle()
+            isOpenExtend.toggle()
+            if isOpenExtend {
+                cancelFocus()
+            }
         }
     }
     
     /// 取消扩展栏
     func closeExtend(){
         withAnimation {
-            if openExtend {
-                openExtend.toggle()
+            if isOpenExtend {
+                isOpenExtend.toggle()
             }
         }
     }
@@ -70,16 +132,28 @@ extension ChatViewModel {
     func changeFace(){
         closeExtend()
         withAnimation {
-            openFace.toggle()
+            isOpenFace.toggle()
+            
+            if isOpenFace {
+                cancelFocus()
+            }
         }
     }
     
     /// 关闭表情栏
     func closeFace(){
         withAnimation {
-            if openFace {
-                openFace.toggle()
+            if isOpenFace {
+                isOpenFace.toggle()
             }
+        }
+    }
+    
+    /// 聊天记录滚动到底部
+    func scrollToBottom(){
+        print("聊天记录滚动到底部",isScrollToBottom)
+        if !isScrollToBottom {
+            isScrollToBottom.toggle()
         }
     }
 }

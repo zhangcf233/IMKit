@@ -12,7 +12,7 @@ struct ChatHeaderView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    let avatar = getRandomAvatar()
+    let avatar = DefaultAvatar
     
     let name = "这个人的名字很长很长很长这个人的名字很长很长很长这个人的名字很长很长很长这个人的名字很长很长很长这个人的名字很长很长很长"
     

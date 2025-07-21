@@ -86,10 +86,12 @@ let msg2 = Message(content: "这是第二条测试消息", sender:sender2)
 
 let msgLongName = Message(content: "这是第二条测试消息", sender:senderLongName)
 
+let msgLast = Message(content: "这是最后一条测试消息", sender:sender2)
+
 let msgLong = Message(content: "这是一条收到的很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试消息", sender:sender2)
 
 let msgLongMine = Message(content: "这是一条自己发送的很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试消息", sender:sender1)
 
-let messages = [
-    msg1,msg2,msgLongName,msgLong,msgLongMine
+let defalutMessages = [
+    msg1,msg2,msgLongName,msg1,msg2,msg1,msg2,msgLongName,msgLongName,msgLong,msgLongMine,msgLast
 ]
