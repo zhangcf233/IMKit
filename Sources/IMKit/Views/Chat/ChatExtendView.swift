@@ -7,12 +7,20 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct ChatExtendView: View {
+    
+    init(_ open: Binding<Bool>) {
+        _open = Binding(projectedValue: open)
     }
-}
-
-#Preview {
-    SwiftUIView()
+    
+    @Binding var open:Bool
+    
+    /// 四列两行
+    
+    var body: some View {
+        VStack(spacing:0){
+            
+        }
+        .frame(height: open ? 100 :0)
+    }
 }

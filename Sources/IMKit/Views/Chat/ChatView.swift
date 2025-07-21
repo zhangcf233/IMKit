@@ -10,8 +10,7 @@ import CommonKit
 
 struct ChatView:View {
     
-    @State var text = ""
-    @State var isFocused = false
+    @StateObject var vm = ChatViewModel()
     
     var body:some View {
         VStack(spacing:0){
@@ -21,15 +20,16 @@ struct ChatView:View {
             
             ChatContentView()
                 .onTapGesture {
-                    isFocused = false
+                    vm.onTapContent()
                 }
             
-            ChatInputView(
-                $text,
-                $isFocused
+            ChatBottomView(
+                $vm.text,
+                $vm.isFocused
             )
         }
         .hiddenNavigationBarSpace()
+        .useChatViewListeners(vm)
     }
 }
 

@@ -13,17 +13,17 @@ struct TextMessageView: View {
         self.message = message
     }
     
-    var isSender:Bool {
-        return message.isSender
+    var isMine:Bool {
+        return message.isMine
     }
     
     let message:Message
     
     var body: some View {
         Text(message.content)
-            .padding(5)
-            .foregroundStyle(isSender ? .white : .black )
-            .background(isSender ? .blue  : .gray.opacity(0.2) )
+            .padding(8)
+            .foregroundStyle(isMine ? .white : .black )
+            .background(isMine ? .blue  : .gray.opacity(0.2) )
             .cornerRadius(10)
     }
     

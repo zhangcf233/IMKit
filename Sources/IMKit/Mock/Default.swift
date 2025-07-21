@@ -7,10 +7,10 @@
 
 import Foundation
 
-let DefaultAvatar = URL(string: "https://dummyimage.com/100x100/000/fff&text=avatar")!
+public let DefaultAvatar = URL(string: "https://dummyimage.com/100x100/000/fff&text=avatar")!
 
-let DefaultAvatar2 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user2")!
-let DefaultAvatar3 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user3")!
+public let DefaultAvatar2 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user2")!
+public let DefaultAvatar3 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user3")!
 let DefaultAvatar4 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user4")!
 
 let DefaultName = ""

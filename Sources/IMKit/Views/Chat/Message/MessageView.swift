@@ -15,8 +15,8 @@ struct MessageView: View {
     
     let message:Message
     
-    var isSender:Bool {
-        return message.isSender
+    var isMine:Bool {
+        return message.sender.type == .mine
     }
     
     var avatar:some View {
@@ -26,37 +26,13 @@ struct MessageView: View {
     }
     
     var body: some View {
-        VStack(spacing:0){
-            
-            time
-            
-            content
-            
-        }
-        .padding(.vertical,4)
-    }
-    
-    var center:some View {
-        VStack(alignment: isSender ? .trailing :.leading,spacing: 5) {
-            Text(message.sender.name)
-                .multilineTextAlignment(.leading)
-                .font(.footnote)
-                .foregroundStyle(.gray)
-                .lineLimit(1)
-            
-            MessageBubbleView(message)
-        }
-    }
-    
-    var content: some View {
         HStack(alignment: .top){
-            if isSender {
+            if isMine {
                 
                 Spacer()
                 
                 center
                 
-                avatar
             }else{
                 
                 avatar
@@ -67,11 +43,35 @@ struct MessageView: View {
                 
             }
         }
+        .padding(.horizontal)
     }
+    
+    var center:some View {
+        VStack(alignment: isMine ? .trailing :.leading,spacing: 5) {
+            
+            if !isMine  {
+                Text(message.sender.name)
+                    .multilineTextAlignment(.leading)
+                    .font(.footnote)
+                    .foregroundStyle(.gray)
+                    .lineLimit(1)
+            }
+            
+            MessageBubbleView(message)
+        }
+    }
+    
+    
     
     /// 时间显示
     var time:some View {
         Text(message.createdAt.formattedDisplayTime())
+            .font(.caption)
+            .padding(.horizontal,4)
+            .padding(.vertical,2)
+            .background(.ultraThinMaterial)
+            .cornerRadius(5)
+            .padding(.vertical,4)
     }
     
     

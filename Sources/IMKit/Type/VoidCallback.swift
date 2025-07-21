@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+/// 通用的无参无返方法类型
+public typealias VoidCallback = () -> Void
+
+/// 默认无参无返方法
+public func defaultVoidCallback(){}

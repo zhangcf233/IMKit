@@ -6,16 +6,18 @@
 //
 
 import SwiftUI
+import CommonKit
 
 struct ChatInputView:View {
     
     init(
         _ text:Binding<String>,
         _ isFocused:Binding<Bool>,
-        
+        _ openExtend:Binding<Bool>
     ) {
         _text = Binding(projectedValue: text)
         _isFocused = Binding(projectedValue: isFocused)
+        _openExtend = Binding(projectedValue: openExtend)
         
     }
     /// 文本内容
@@ -24,9 +26,11 @@ struct ChatInputView:View {
     /// 焦点控制
     @Binding var isFocused:Bool
     
+    /// 是否展开扩展栏
+    @Binding var openExtend:Bool
+    
     /// 是否要底部对齐
     @State var needAlignmentBottom = false
-    
     
     var body: some View {
         HStack(alignment:needAlignmentBottom ?.bottom : .center,spacing: 0) {
@@ -63,7 +67,7 @@ struct ChatInputView:View {
     var rightView:some View {
         HStack(spacing: 5) {
             /// 语音
-            voiceView
+//            voiceView
             /// 表情
             faceView
             /// 扩展功能
@@ -97,12 +101,13 @@ struct ChatInputView:View {
             onTapExtend()
         } label: {
             Image(systemName: "plus.circle")
+                .rotationEffect(Angle.degrees(openExtend ? 45 : 0))
         }
     }
     
     /// 点击表情按钮
     func onTapFace(){
-        
+        callEvent(.IM_OnChangeFace)
     }
     
     /// 点击语音按钮
@@ -117,15 +122,33 @@ struct ChatInputView:View {
     
     /// 点击扩展按钮
     func onTapExtend(){
-        
+        callEvent(.IM_OnChangeExtend)
+    }
+    
+    /// 切换扩展栏
+    func changeExtend(){
+        withAnimation {
+            self.openExtend.toggle()
+        }
+    }
+    
+    /// 关闭扩展栏
+    func closeExtend(){
+        withAnimation {
+            if openExtend {
+                self.openExtend.toggle()
+            }
+        }
     }
 }
 
 #Preview {
     @State var text = ""
     @State var isFocused  = false
+    @State var openExtend = false
     ChatInputView(
         $text,
-        $isFocused
+        $isFocused,
+        $openExtend
     )
 }
