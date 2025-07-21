@@ -10,24 +10,7 @@ import CommonKit
 
 struct ChatInputView:View {
     
-    init(
-        _ text:Binding<String>,
-        _ isFocused:Binding<Bool>,
-        _ openExtend:Binding<Bool>
-    ) {
-        _text = Binding(projectedValue: text)
-        _isFocused = Binding(projectedValue: isFocused)
-        _openExtend = Binding(projectedValue: openExtend)
-        
-    }
-    /// 文本内容
-    @Binding var text:String
-    
-    /// 焦点控制
-    @Binding var isFocused:Bool
-    
-    /// 是否展开扩展栏
-    @Binding var openExtend:Bool
+    @StateObject var vm:ChatViewModel
     
     /// 是否要底部对齐
     @State var needAlignmentBottom = false
@@ -39,7 +22,7 @@ struct ChatInputView:View {
             cameraBtn
             
             /// 输入框
-            AutoGrowingField($text,$isFocused){ old,new in
+            AutoGrowingField($vm.text,$vm.isFocused){ old,new in
                 needAlignmentBottom = old != new
             }
             
@@ -89,7 +72,7 @@ struct ChatInputView:View {
     /// 表情按钮
     var faceView:some View {
         Button {
-            onTapFace()
+            vm.changeFace()
         } label: {
             Image(systemName: "face.smiling")
         }
@@ -98,16 +81,11 @@ struct ChatInputView:View {
     /// 扩展按钮
     var extendView:some View {
         Button {
-            onTapExtend()
+            vm.changeExtend()
         } label: {
             Image(systemName: "plus.circle")
-                .rotationEffect(Angle.degrees(openExtend ? 45 : 0))
+                .rotationEffect(Angle.degrees(vm.openExtend ? 45 : 0))
         }
-    }
-    
-    /// 点击表情按钮
-    func onTapFace(){
-        callEvent(.IM_OnChangeFace)
     }
     
     /// 点击语音按钮
@@ -120,35 +98,4 @@ struct ChatInputView:View {
         
     }
     
-    /// 点击扩展按钮
-    func onTapExtend(){
-        callEvent(.IM_OnChangeExtend)
-    }
-    
-    /// 切换扩展栏
-    func changeExtend(){
-        withAnimation {
-            self.openExtend.toggle()
-        }
-    }
-    
-    /// 关闭扩展栏
-    func closeExtend(){
-        withAnimation {
-            if openExtend {
-                self.openExtend.toggle()
-            }
-        }
-    }
-}
-
-#Preview {
-    @State var text = ""
-    @State var isFocused  = false
-    @State var openExtend = false
-    ChatInputView(
-        $text,
-        $isFocused,
-        $openExtend
-    )
 }

@@ -7,12 +7,31 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct ChatFaceView: View {
+    init(_ open:Binding<Bool>){
+        _open = Binding(projectedValue: open)
     }
-}
-
-#Preview {
-    SwiftUIView()
+    
+    @Binding var open:Bool
+    
+    let height = 200.0
+    
+    var body: some View {
+        ScrollView{
+            ScrollView(.horizontal){
+                HStack{
+                    Text("分类1")
+                    Text("分类1")
+                    Text("分类1")
+                }
+            }
+            
+            VStack{
+                Text("😀😃😄😁🤣🥲")
+            }
+        }
+        .frame(height: open ? height : 0)
+        .opacity(open ? 1 :0)
+        .clipped()
+    }
 }

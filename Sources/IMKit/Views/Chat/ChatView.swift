@@ -23,10 +23,7 @@ struct ChatView:View {
                     vm.onTapContent()
                 }
             
-            ChatBottomView(
-                $vm.text,
-                $vm.isFocused
-            )
+            ChatBottomView(vm:vm)
         }
         .hiddenNavigationBarSpace()
         .useChatViewListeners(vm)

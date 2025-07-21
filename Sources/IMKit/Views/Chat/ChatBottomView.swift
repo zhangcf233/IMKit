@@ -10,55 +10,18 @@ import Foundation
 
 struct ChatBottomView: View {
     
-    init(
-        _ text:Binding<String>,
-        _ isFocused: Binding<Bool>
-    ) {
-        _text = Binding(projectedValue: text)
-        _isFocused = Binding(projectedValue: isFocused)
-        
-        self.openExtend = openExtend
-    }
-    
-    @Binding var isFocused:Bool
-    
-    @Binding var text:String
-    @State var openExtend = false
+    @StateObject var vm:ChatViewModel
     
     var body: some View {
         VStack(spacing: 0){
             /// 输入框
-            ChatInputView(
-                $text,
-                $isFocused,
-                $openExtend
-            )
+            ChatInputView(vm: vm)
             
             /// 扩展栏
-            ChatExtendView($openExtend)
-        }
-        .onEvent(.IM_OnChangeExtend) { _ in
-            changeExtend()
-        }
-        .onEvent(.IM_OnCloseExtend) { _ in
-            closeExtend()
-        }
-    }
-    
-    /// 切换扩展栏
-    func changeExtend(){
-        withAnimation {
-            openExtend.toggle()
-            print(openExtend)
-        }
-    }
-    
-    /// 取消扩展栏
-    func closeExtend(){
-        withAnimation {
-            if openExtend {
-                openExtend.toggle()
-            }
+            ChatExtendView($vm.openExtend)
+            
+            /// 表情栏
+            ChatFaceView($vm.openFace)
         }
     }
 }

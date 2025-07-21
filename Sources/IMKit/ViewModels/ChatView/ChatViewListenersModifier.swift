@@ -18,8 +18,23 @@ public struct ChatViewListenersModifier:ViewModifier {
     
     public func body(content: Content) -> some View {
         content
+            /// 焦点管理
             .onEvent(.IM_OnCancelFocused) { _ in
                 vm.cancelFocus()
+            }
+            /// 表情栏
+            .onEvent(.IM_OnCloseFace) { _ in
+                vm.closeFace()
+            }
+            .onEvent(.IM_OnChangeFace) { _ in
+                vm.changeFace()
+            }
+            /// 扩展栏
+            .onEvent(.IM_OnCloseExtend) { _ in
+                vm.closeExtend()
+            }
+            .onEvent(.IM_OnChangeExtend) { _ in
+                vm.changeExtend()
             }
     }
 }
