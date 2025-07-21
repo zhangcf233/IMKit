@@ -36,7 +36,7 @@ struct ChatContentView: View {
                 content(proxy)
             }
             .coordinateSpace(name: coordinateSpaceName)
-            .overlay(alignment:.bottom){
+            .overlay(alignment:.bottomTrailing){
                 /// 滚动提示器
                 scrollToBottomTipsView(proxy)
             }
@@ -86,14 +86,14 @@ struct ChatContentView: View {
             scrollToBottom(proxy)
         }label: {
             Image(systemName: "chevron.down.2")
-                .foregroundStyle(.black)
+                .foregroundStyle(Color(.systemGray))
                 .padding(8)
                 .background(.ultraThinMaterial)
                 .cornerRadius(50)
         }
         .opacity(isShowScrollToBottomTips ? 1 :0)
         .clipped()
-        .offset(y:-20)
+        .offset(x:-15,y:-20)
     }
     
     /// 顶部滚动距离占位视图

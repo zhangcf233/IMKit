@@ -31,7 +31,11 @@ struct ConversionCellView: View {
         .listRowInsets(EdgeInsets())
         .listRowSeparator(.hidden)
         .contentShape(Rectangle())
-        .background(conversion.isTop ? .gray.opacity(0.1) : .clear)
+        .background(
+            conversion.isTop
+            ? Color(.systemGray).opacity(0.2)
+            : Color(.systemBackground)
+        )
     }
     
     var avatar:some View {
