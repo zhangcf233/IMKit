@@ -9,10 +9,10 @@ import Foundation
 import Combine
 
 /// 所有 IM ViewModel 的基类
-open class BaseViewModel: ObservableObject {
+open class BaseViewModel:ObservableObject,BaseErrorProtocol {
     
     /// 当前错误信息（用于绑定 UI 提示）
-    @Published public private(set) var errorMessage: String? = nil
+    @Published public var errorMessage: String? = nil
 
     /// 设置错误信息（支持 Error 类型）
     public func setError(_ error: Error) {

@@ -11,6 +11,7 @@ import SwiftUI
 struct Test: View {
     
     @State var select = 1
+    
     var body: some View {
         NavigationView {
             TabView(selection: $select){
@@ -21,7 +22,14 @@ struct Test: View {
                         Text("首页")
                     }
 
-                IMKit.create(DefaultDebugIMConfig)
+                IMKit.create(
+                    IMClient(
+                        IMConfig(
+                            "https:1.com",
+                            "aaa"
+                        )
+                    )
+                )
                     .tag(1)
                     .tabItem{
                         Image(systemName: "bubble")

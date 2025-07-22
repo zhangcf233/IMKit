@@ -9,12 +9,24 @@ import SwiftUI
 
 class IMViewModel:BaseViewModel {
     
-    init(_ config:IMConfig) {
-        self.config = config
+    init(_ client:IMClient){
+        self.client = client
+    }
+      
+    @ObservedObject var client:IMClient
+    
+    /// 默认文案
+    var defaultTitle = "消息"
+    
+    /// 连接状态文案
+    var title:String {
+        clientStatus.showStatusText ? clientStatus.name : defaultTitle
     }
     
-    /// 配置
-    var config:IMConfig
+    /// 连接器状态
+    var clientStatus:IMClientStatus {
+        return client.status
+    }
     
     /// 搜索
     @Published var searchConversion = ""

@@ -10,6 +10,10 @@ import CommonKit
 
 struct ChatInputView:View {
     
+    init(_ vm: ChatViewModel) {
+        _vm = StateObject(wrappedValue: vm)
+    }
+    
     @StateObject var vm:ChatViewModel
     
     /// 是否要底部对齐
@@ -136,5 +140,5 @@ struct ChatInputView:View {
 
 #Preview {
     @StateObject var vm = ChatViewModel()
-    ChatInputView(vm: vm)
+    ChatInputView(vm)
 }

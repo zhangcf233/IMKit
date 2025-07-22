@@ -15,7 +15,7 @@ struct ChatBottomView: View {
     var body: some View {
         VStack(spacing: 0){
             /// 输入框
-            ChatInputView(vm: vm)
+            ChatInputView(vm)
             
             /// 扩展栏
             ChatExtendView($vm.isOpenExtend)

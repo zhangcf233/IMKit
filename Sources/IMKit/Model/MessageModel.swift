@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import KakaJSON
 
 /// MARK:  消息类型
 public enum MessageType:String,Codable,Hashable {
     case text
+}
+
+/// MARK: 消息内容
+public enum MessageContent:String,ConvertibleEnum {
+    case text = ""
 }
 
 /// MARK:  消息状态
@@ -50,11 +56,21 @@ let senderLongName = Sender(id: "u_3", name: "王二二二二二二二二二二�
 /// 聊天消息
 public struct Message:Identifiable,Codable,Hashable {
     
-    public let id:String
+    /// 消息编号
+    public var id:String { serverMessageId ?? clientMessageId }
+    /// 原始 id
+    public let clientMessageId:String
+    /// 服务端分配 id
+    public let serverMessageId:String?
+    /// 消息类型
     public let type:MessageType
+    /// 消息内容
     public var content:String
+    /// 创建时间
     public var createdAt:Date
+    /// 发送者信息
     public var sender:Sender
+    /// 消息状态
     public var status:MessageStatus
     
     var isMine:Bool {
@@ -62,14 +78,14 @@ public struct Message:Identifiable,Codable,Hashable {
     }
     
     public init(
-        id: String = UUID().uuidString,
         type: MessageType = .text,
         content: String,
         createdAt: Date = .now,
         sender: Sender,
         status: MessageStatus = .sent,
     ) {
-        self.id = id
+        self.clientMessageId = UUID().uuidString
+        self.serverMessageId = nil
         self.type = type
         self.content = content
         self.createdAt = createdAt
