@@ -15,18 +15,12 @@ struct IMView<P:IMProvider>: View {
         _ provider:P
     ){
         
-        let client = IMClient(provider)
-        
         _provider = StateObject(wrappedValue: provider )
         
-        _client = StateObject(wrappedValue: client)
-        
-        _vm = StateObject(wrappedValue: IMViewModel(client))
+        _vm = StateObject(wrappedValue: IMViewModel(provider))
     }
     
     @StateObject var vm:IMViewModel<P>
-    
-    @StateObject var client:IMClient<P>
     
     @StateObject var provider:P
     
@@ -34,7 +28,7 @@ struct IMView<P:IMProvider>: View {
     var body: some View {
         NavigationView {
             
-            switch vm.clientStatus {
+            switch vm.status {
                 
             case .success:
                 successView
@@ -68,9 +62,9 @@ struct IMView<P:IMProvider>: View {
     /// 其他场景页面
     var otherView:some View{
         VStack{
-            switch vm.clientStatus {
+            switch vm.status{
             case .connecting:
-                ProgressView(vm.clientStatus.name)
+                ProgressView(vm.status.name)
             case .disconnected,.fail,.reconnect:
                 reconnectView
             default:
@@ -87,10 +81,10 @@ struct IMView<P:IMProvider>: View {
                 .font(.system(size: 100))
                 .foregroundStyle(.red)
             
-            Text(vm.clientStatus.name)
+            Text(vm.status.name)
             
             Button("重新连接") {
-                vm.client.provider.connect()
+                vm.provider.connect()
             }
             .buttonStyle(.bordered)
         }
@@ -100,9 +94,9 @@ struct IMView<P:IMProvider>: View {
     var debugMenuView:some View {
         Menu {
             
-            if vm.client.status == .success {
+            if vm.status == .success {
                 Button(role: .destructive){
-                    vm.client.provider.disconnect()
+                    vm.provider.disconnect()
                 } label: {
                     Label {
                         Text("断开")
@@ -112,9 +106,9 @@ struct IMView<P:IMProvider>: View {
                 }
             }
             
-            if vm.client.status == .disconnected {
+            if vm.status == .disconnected {
                 Button {
-                    vm.client.provider.connect()
+                    vm.provider.connect()
                 } label: {
                     Label {
                         Text("重连")

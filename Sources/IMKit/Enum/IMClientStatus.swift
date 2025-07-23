@@ -8,7 +8,7 @@
 import Foundation
 
 /// 连接状态
-public enum IMClientStatus {
+public enum IMStatus {
     
     case disconnected
     case connecting

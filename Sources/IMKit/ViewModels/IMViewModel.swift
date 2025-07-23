@@ -9,24 +9,8 @@ import SwiftUI
 
 class IMViewModel<P:IMProvider>:BaseViewModel {
     
-    init(_ client:IMClient<P>){
-        self.client = client
-    }
-      
-    /// 连接器
-    @ObservedObject var client:IMClient<P>
-    
-    /// 默认文案
-    var defaultTitle = "消息"
-    
-    /// 连接状态文案
-    var title:String {
-        clientStatus.showStatusText ? clientStatus.name : defaultTitle
-    }
-    
-    /// 连接器状态
-    var clientStatus:IMClientStatus {
-        return client.status
+    init(_ provider:P){
+        self.provider = provider
     }
     
     /// 搜索
@@ -34,6 +18,25 @@ class IMViewModel<P:IMProvider>:BaseViewModel {
     
     /// 会话列表
     @Published var conversions:[Conversation] = DefaultConversions
+
+    /// 连接器
+    @ObservedObject var provider:P
+    
+    /// 默认文案
+    let defaultTitle = "消息"
+}
+
+extension IMViewModel{
+    
+    /// 连接状态文案
+    var title:String {
+        status.showStatusText ? status.name : defaultTitle
+    }
+    
+    /// 连接器状态
+    var status:IMStatus {
+        return provider.status
+    }
     
     /// 过滤搜索内容
     var filteredConversations: [Conversation] {

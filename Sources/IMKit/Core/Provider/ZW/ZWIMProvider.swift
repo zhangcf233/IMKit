@@ -44,11 +44,12 @@ final class ZWIMProvider:BaseViewModel,IMProvider{
     private  var service:SignalRService?
     
     /// 连接状态
-    @Published var status: IMClientStatus = .disconnected
+    @Published var status: IMStatus = .disconnected
     
     
     /// 发起连接
     func connect() {
+        self.status = .connecting
         service?.start()
     }
     
@@ -57,8 +58,8 @@ final class ZWIMProvider:BaseViewModel,IMProvider{
         service?.stop()
     }
     
-    func getUserInfo() {
-        
+    func getUserInfo()->User {
+        return User(id: "123", name: "123", avatar:DefaultAvatar2)
     }
     
     

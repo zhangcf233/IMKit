@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol IMProvider:BaseViewModel {
     
@@ -18,7 +19,7 @@ protocol IMProvider:BaseViewModel {
     var config:IMConfig { get }
     
     /// 连接状态
-    var status:IMClientStatus {get}
+    var status: IMStatus {get}
     
     /// 发起连接
     func connect()
@@ -27,5 +28,5 @@ protocol IMProvider:BaseViewModel {
     func disconnect()
     
     /// 获取用户信息
-    func getUserInfo()
+    func getUserInfo()->User
 }

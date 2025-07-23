@@ -13,7 +13,9 @@ struct Test: View {
     @State var select = 1
     
     
-    let provider = MockIMProvider(DefaultIMConfig)
+    let mockProvider = MockIMProvider(DefaultIMConfig)
+    
+    let zwProvider = ZWIMProvider(DefaultIMConfig)
     
     var body: some View {
         NavigationView {
@@ -26,7 +28,7 @@ struct Test: View {
                     }
 
                 
-                IMView(provider)
+                IMView(mockProvider)
                     .tag(1)
                     .tabItem{
                         Image(systemName: "bubble")
