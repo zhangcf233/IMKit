@@ -10,7 +10,7 @@ import Foundation
 /// 配置协议
 public protocol IMConfigProtocol {
     /// 域名
-    var domain:String {get}
+    var url:String {get}
     /// 路由标记
     var routeFlag:String {get}
 }

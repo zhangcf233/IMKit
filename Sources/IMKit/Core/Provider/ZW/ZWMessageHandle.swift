@@ -7,20 +7,7 @@
 
 import Foundation
 import SignalRClient
-/// signalR 服务
-public  class SignalRService {
-    private var connection:HubConnection
-    
-    public init(_ url:URL){
-        connection = HubConnectionBuilder(url: url)
-            .withLogging(minLogLevel: .error)
-            .build()
-        
-        connection.on(method: "ReceiveMessageAsync"){
-            
-        }
-    }
-    
-    /// 消息监听方法
+/// 消息解析类
+public  class ZWMessageHandle {
     
 }

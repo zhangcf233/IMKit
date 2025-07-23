@@ -12,11 +12,10 @@ struct IMView<P:IMProvider>: View {
     @Environment(\.imConfig.routeFlag) var flag
     
     init(
-        _ config:IMConfig,
         _ provider:P
     ){
         
-        let client = IMClient(config,provider)
+        let client = IMClient(provider)
         
         _provider = StateObject(wrappedValue: provider )
         
@@ -36,13 +35,27 @@ struct IMView<P:IMProvider>: View {
         NavigationView {
             ConversitionView(vm.filteredConversations)
                 .navigationBarTitle(
-                    Text( vm.title + vm.client.provider.name)
+                    Text(vm.title)
                 )
                 .navigationBarTitleDisplayMode(.inline)
                 .searchable(
                     text: $vm.searchConversion,
                     placement: .navigationBarDrawer
                 )
+                .toolbar {
+                    Button {
+                        vm.client.provider.disconnect()
+                    } label: {
+                        Text("断开")
+                    }
+                    
+                    Button {
+                        vm.client.provider.connect()
+                    } label: {
+                        Text("重连")
+                    }
+
+                }
         }
         .useRoute(flag)
     }

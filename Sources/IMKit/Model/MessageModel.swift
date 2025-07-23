@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KakaJSON
 
 /// MARK:  消息类型
 public enum MessageType:String,Codable,Hashable {
@@ -14,7 +13,7 @@ public enum MessageType:String,Codable,Hashable {
 }
 
 /// MARK: 消息内容
-public enum MessageContent:String,ConvertibleEnum {
+public enum MessageContent:String {
     case text = ""
 }
 

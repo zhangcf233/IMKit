@@ -13,10 +13,9 @@ final class IMClient<P:IMProvider>:BaseViewModel {
     @ObservedObject var provider: P
     
     init(
-        _ config:IMConfig,
         _ provider:P
     ){
-        self.config = config
+        self.config = provider.config
         self.provider = provider
         super.init()
         self.connect()

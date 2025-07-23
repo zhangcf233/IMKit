@@ -17,30 +17,25 @@ final class IMConfig:IMConfigProtocol{
     
     // MARK: 初始化
     public init(
-        _ domain:String,
-        _ token:String,
+        _ url:String
     ){
-        self.domain = domain
-        self.token = token
+        self.url = url
     }
     
-    // MARK: 域名配置
-    public let domain:String
+    /// MARK: 请求地址
+    public let url:String
     
-    // MARK: token
-    public let token:String
     
-    // MARK: 路由标记
+    /// MARK: 路由标记
     public let routeFlag:String = UUID().uuidString
+    
 }
 
 
-let domain = "https://player.srzw123.com"
+let url = "https://player.srzw123.com/chatHub"
 
-let token = "CfDJ8KmyT1KtGIxHjS-9anRiBrHf0i1q_0EUte0ZI6hZ1oJ-iq2K0fJ5ikxSEoeC4Q8D8jaM9wnIzHC2hAhZDRxiua5xmRCJC9KJdtWsSXQcfKj3SGv8bJqrVDkmcS6Dqg6WXEBslWaYSm9SWpVliD0AGUsSwDd3g0dfAWpZYqDV9rYm"
-
-/// 默认配置
- let DefaultIMConfig = IMConfig(domain,token)
+let token = "CfDJ8KmyT1KtGIxHjS-9anRiBrFEa4mob1Z360tsvcoCba68W_SsfTG1jECvNQnWyp4C8YSrzNJ4aZJLV4ZcsREgjWw0YizIhjphTZib3hRlmNmHHBhwuikVPTtQ7ErZx1zhxgreW8hqURYCGL0wXnd9Y35qER4g_6ZRTJP-z1DYxdNT"
 
 /// 默认配置
- let DefaultDebugIMConfig = IMConfig(domain,token)
+ let DefaultIMConfig = IMConfig("\(url)?AppToken=\(token)")
+

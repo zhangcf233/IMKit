@@ -16,7 +16,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/fatbobman/NavigationViewKit", from: "0.0.5"),
-        .package(url: "https://github.com/onevcat/Kingfisher", from: "7.9.1")
+        .package(url: "https://github.com/onevcat/Kingfisher", from: "7.9.1"),
+        .package(url: "https://github.com/moozzyk/SignalR-Client-Swift.git", from: "1.1.0"),
     ],
     targets: [
         .target(
@@ -24,6 +25,7 @@ let package = Package(
             dependencies: [
                 "NavigationViewKit",
                 "Kingfisher",
+                .product(name: "SignalRClient", package: "signalr-client-swift"),
             ],
             resources: [
                 .process("Resources")

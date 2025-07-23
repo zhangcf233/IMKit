@@ -10,17 +10,17 @@ import SwiftUI
 /// IMKit
 final class IMKit {
     
-    static var config:IMConfig = DefaultIMConfig
+//    static var config:IMConfig = DefaultIMConfig
     
-    static var provider:IMProvider = MockIMProvider()
+//    static var provider:IMProvider = MockIMProvider()
     
-    init(
-        _ config: IMConfig,
-        _ provider:IMProvider
-    ) {
-        IMKit.config = config
-        IMKit.provider = provider
-    }
+//    init(
+//        _ config: IMConfig,
+//        _ provider:IMProvider
+//    ) {
+//        IMKit.config = config
+//        IMKit.provider = provider
+//    }
     
     
     // MARK: 创建 IM 视图

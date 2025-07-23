@@ -8,7 +8,6 @@
 import Foundation
 
 extension Notification.Name{
-    
-    
-    
+    /// 链接成功
+    public static let IM_OnConnected = Notification.Name("IM_OnConnected")
 }

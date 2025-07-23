@@ -12,6 +12,9 @@ struct Test: View {
     
     @State var select = 1
     
+    
+    let provider = ZWIMProvider(DefaultIMConfig)
+    
     var body: some View {
         NavigationView {
             TabView(selection: $select){
@@ -23,7 +26,7 @@ struct Test: View {
                     }
 
                 
-                IMView(DefaultIMConfig,ZWIMProvider())
+                IMView(provider)
                     .tag(1)
                     .tabItem{
                         Image(systemName: "bubble")
