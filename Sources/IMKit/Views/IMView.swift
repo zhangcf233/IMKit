@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IMView<P:IMProvider>: View {
     
-    @Environment(\.imConfig.routeFlag) var flag
+    @Environment(\.imConfig) var config
     
     init(
         _ provider:P
@@ -43,22 +43,46 @@ struct IMView<P:IMProvider>: View {
                     placement: .navigationBarDrawer
                 )
                 .toolbar {
-                    Button {
-                        vm.client.provider.disconnect()
-                    } label: {
-                        Text("断开")
+                    if config.isDebug {
+                        debugMenuView
                     }
-                    
-                    Button {
-                        vm.client.provider.connect()
-                    } label: {
-                        Text("重连")
-                    }
-
                 }
         }
-        .useRoute(flag)
+        .useRoute(config.routeFlag)
     }
 
+    
+    var debugMenuView:some View {
+        Menu {
+            
+            if vm.client.status == .success {
+                Button(role: .destructive){
+                    vm.client.provider.disconnect()
+                } label: {
+                    Label {
+                        Text("断开")
+                    } icon: {
+                        Image(systemName: "personalhotspot.slash")
+                    }
+                }
+            }
+            
+            if vm.client.status == .disconnected {
+                Button {
+                    vm.client.provider.connect()
+                } label: {
+                    Label {
+                        Text("重连")
+                    } icon: {
+                        Image(systemName: "personalhotspot")
+                    }
+                }
+            }
+            
+        } label: {
+                Image(systemName: "ladybug")
+            
+        }
+    }
 }
 
