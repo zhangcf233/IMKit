@@ -6,9 +6,9 @@
 //
 
 import Foundation
-final class TencentIMProvider:BaseViewModel,IMProvider{
+final class ZWIMProvider:BaseViewModel,IMProvider{
     
-    let name = "腾讯"
+    let name = "正万"
     
     @Published var status: IMClientStatus = .disconnected
     
@@ -16,7 +16,7 @@ final class TencentIMProvider:BaseViewModel,IMProvider{
         status = .connected
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.status = .success
-            print("MockIMProvider 已连接")
+            print("已连接")
         }
     }
     

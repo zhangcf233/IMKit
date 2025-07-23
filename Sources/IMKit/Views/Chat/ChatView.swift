@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CommonKit
 
 struct ChatView:View {
     

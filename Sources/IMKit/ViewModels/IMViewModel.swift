@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-class IMViewModel:BaseViewModel {
+class IMViewModel<P:IMProvider>:BaseViewModel {
     
-    init(_ client:IMClient){
+    init(_ client:IMClient<P>){
         self.client = client
     }
       
-    @ObservedObject var client:IMClient
+    /// 连接器
+    @ObservedObject var client:IMClient<P>
     
     /// 默认文案
     var defaultTitle = "消息"

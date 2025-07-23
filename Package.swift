@@ -15,15 +15,15 @@ let package = Package(
             targets: ["IMKit"])
     ],
     dependencies: [
-        .package(url: "https://gitee.com/zhang_chao_fu/CommonKit.git", from: "0.2.26"),
-        .package(url: "https://github.com/fatbobman/NavigationViewKit", from: "0.0.5")
+        .package(url: "https://github.com/fatbobman/NavigationViewKit", from: "0.0.5"),
+        .package(url: "https://github.com/onevcat/Kingfisher", from: "7.9.1")
     ],
     targets: [
         .target(
             name: "IMKit",
             dependencies: [
-                "CommonKit",
-                "NavigationViewKit"
+                "NavigationViewKit",
+                "Kingfisher",
             ],
             resources: [
                 .process("Resources")

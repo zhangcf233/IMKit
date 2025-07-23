@@ -5,29 +5,32 @@
 //  Created by 张朝富 on 2025/7/22.
 //
 
-import Foundation
+import SwiftUI
 
 /// 消息客户端
-final class IMClient:BaseViewModel {
+final class IMClient<P:IMProvider>:BaseViewModel {
     
-    init(_ config:IMConfig){
+    @ObservedObject var provider: P
+    
+    init(
+        _ config:IMConfig,
+        _ provider:P
+    ){
         self.config = config
+        self.provider = provider
         super.init()
         self.connect()
-        
     }
     
     var config:IMConfig
     
     /// 连接状态
-    @Published var status:IMClientStatus = .connected
+    var status:IMClientStatus{
+        return provider.status
+    }
     
     /// 连接方法
     func connect(){
-        self.status = .connected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            self?.status = .success
-            print("连接成功")
-        }
+        self.provider.connect()
     }
 }

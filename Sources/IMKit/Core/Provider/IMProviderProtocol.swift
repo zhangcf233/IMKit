@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+protocol IMProvider:BaseViewModel {
+    
+    var name:String {get}
+    
+    var status:IMClientStatus {get}
+    
+    func connect()
+    
+    func disconnect()
+    
+}

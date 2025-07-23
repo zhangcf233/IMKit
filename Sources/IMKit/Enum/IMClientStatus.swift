@@ -9,7 +9,8 @@ import Foundation
 
 /// 连接状态
 public enum IMClientStatus {
-    case start
+    
+    case disconnected
     case connected
     case fail
     case reconnect
@@ -17,8 +18,8 @@ public enum IMClientStatus {
     
     var name:String {
         switch self {
-        case .start:
-            "启动中..."
+        case .disconnected:
+            "未连接"
         case .connected:
             "连接中..."
         case .success:

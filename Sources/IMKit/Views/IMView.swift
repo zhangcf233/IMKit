@@ -7,27 +7,36 @@
 
 import SwiftUI
 
-struct IMView: View {
-    
-    init(_ client:IMClient){
-        
-       _client = StateObject(wrappedValue: client)
-        
-       _vm = StateObject(wrappedValue: IMViewModel(client))
-    }
+struct IMView<P:IMProvider>: View {
     
     @Environment(\.imConfig.routeFlag) var flag
     
-    @StateObject var vm:IMViewModel
+    init(
+        _ config:IMConfig,
+        _ provider:P
+    ){
+        
+        let client = IMClient(config,provider)
+        
+        _provider = StateObject(wrappedValue: provider )
+        
+        _client = StateObject(wrappedValue: client)
+        
+        _vm = StateObject(wrappedValue: IMViewModel(client))
+    }
     
-    @StateObject var client:IMClient
+    @StateObject var vm:IMViewModel<P>
+    
+    @StateObject var client:IMClient<P>
+    
+    @StateObject var provider:P
     
     
     var body: some View {
         NavigationView {
             ConversitionView(vm.filteredConversations)
                 .navigationBarTitle(
-                    Text(vm.title)
+                    Text( vm.title + vm.client.provider.name)
                 )
                 .navigationBarTitleDisplayMode(.inline)
                 .searchable(

@@ -12,15 +12,20 @@ final class IMKit {
     
     static var config:IMConfig = DefaultIMConfig
     
-    init(_ config: IMConfig) {
+    static var provider:IMProvider = MockIMProvider()
+    
+    init(
+        _ config: IMConfig,
+        _ provider:IMProvider
+    ) {
         IMKit.config = config
-        self.client = IMClient(config)
+        IMKit.provider = provider
     }
     
-    var client:IMClient
     
     // MARK: 创建 IM 视图
-    public static func create(_ client:IMClient)-> some View{
-        IMView(client).environment(\.imConfig, config)
-    }
+//    public static func create()-> some View{
+//        IMView()
+//            .environment(\.imConfig, config)
+//    }
 }

@@ -22,14 +22,8 @@ struct Test: View {
                         Text("首页")
                     }
 
-                IMKit.create(
-                    IMClient(
-                        IMConfig(
-                            "https:1.com",
-                            "aaa"
-                        )
-                    )
-                )
+                
+                IMView(DefaultIMConfig,ZWIMProvider())
                     .tag(1)
                     .tabItem{
                         Image(systemName: "bubble")
