@@ -18,11 +18,13 @@ let package = Package(
         .package(url: "https://github.com/fatbobman/NavigationViewKit", from: "0.0.5"),
         .package(url: "https://github.com/onevcat/Kingfisher", from: "7.9.1"),
         .package(url: "https://github.com/moozzyk/SignalR-Client-Swift.git", from: "1.1.0"),
+        .package(url: "https://github.com/kakaopensource/KakaJSON", from: "1.1.2"),
     ],
     targets: [
         .target(
             name: "IMKit",
             dependencies: [
+                "KakaJSON",
                 "NavigationViewKit",
                 "Kingfisher",
                 .product(name: "SignalRClient", package: "signalr-client-swift"),

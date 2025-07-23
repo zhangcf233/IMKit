@@ -1,0 +1,37 @@
+{
+    "type": 1,
+    "target": "ReceiveMessageAsync",
+    "arguments": [{
+        "code": 0,
+        "msg": "初始化成功",
+        "type": "OnConnectedAsync",
+        "data": {
+            "mine": {
+                "id": 13433,
+                "username": "张朝富",
+                "nickname": "张朝富",
+                "avatar": "/upload/im-user-headers/13433/01f649761141735a125b7fcc8a6e8559845809.jpg",
+                "addtype": "Verify"
+            },
+            "friend": [{
+                "id": 0,
+                "sort": 0,
+                "groupname": "我的好友",
+                "list": [{
+                    "id": 13439,
+                    "username": "8r9YRmFR",
+                    "nickname": "8r9YRmFR",
+                    "avatar": "/logo.jpg",
+                    "agentid": 0
+                }]
+            }],
+            "group": [{
+                "id": 186,
+                "nospeak": false,
+                "groupname": "张朝富的群聊",
+                "addtype": "Enable",
+                "avatar": "/logo.jpg"
+            }]
+        }
+    }]
+}

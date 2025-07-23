@@ -18,7 +18,7 @@ final class IMClient<P:IMProvider>:BaseViewModel {
         self.config = provider.config
         self.provider = provider
         super.init()
-//        self.connect()
+        self.connect()
     }
     
     var config:IMConfig
