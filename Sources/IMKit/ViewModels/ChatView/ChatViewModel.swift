@@ -113,7 +113,9 @@ extension ChatViewModel {
         withAnimation {
             isOpenExtend.toggle()
             if isOpenExtend {
-                cancelFocus()
+                setTimeOut(time: 0.1) {
+                    self.cancelFocus()
+                }
             }
         }
     }
@@ -134,7 +136,9 @@ extension ChatViewModel {
             isOpenFace.toggle()
             
             if isOpenFace {
-                cancelFocus()
+                setTimeOut(time: 0.1) {
+                    self.cancelFocus()
+                }
             }
         }
     }
