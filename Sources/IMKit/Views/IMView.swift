@@ -33,25 +33,70 @@ struct IMView<P:IMProvider>: View {
     
     var body: some View {
         NavigationView {
-            ConversitionView(vm.filteredConversations)
-                .navigationBarTitle(
-                    Text(vm.title)
-                )
-                .navigationBarTitleDisplayMode(.inline)
-                .searchable(
-                    text: $vm.searchConversion,
-                    placement: .navigationBarDrawer
-                )
-                .toolbar {
-                    if config.isDebug {
-                        debugMenuView
-                    }
-                }
+            
+            switch vm.clientStatus {
+                
+            case .success:
+                successView
+                    
+            default:
+                otherView
+            }
+            
         }
         .useRoute(config.routeFlag)
     }
-
     
+    /// 连接成功
+    var successView:some View {
+        ConversitionView(vm.filteredConversations)
+            .navigationBarTitle(
+                Text(vm.title)
+            )
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(
+                text: $vm.searchConversion,
+                placement: .navigationBarDrawer
+            )
+            .toolbar {
+                if config.isDebug {
+                    debugMenuView
+                }
+            }
+    }
+    
+    /// 其他场景页面
+    var otherView:some View{
+        VStack{
+            switch vm.clientStatus {
+            case .connecting:
+                ProgressView(vm.clientStatus.name)
+            case .disconnected,.fail,.reconnect:
+                reconnectView
+            default:
+                EmptyView()
+            }
+            
+        }
+    }
+    
+    /// 重连按钮
+    var reconnectView:some View {
+        VStack{
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 100))
+                .foregroundStyle(.red)
+            
+            Text(vm.clientStatus.name)
+            
+            Button("重新连接") {
+                vm.client.provider.connect()
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+    
+    /// 调试菜单
     var debugMenuView:some View {
         Menu {
             
@@ -80,7 +125,7 @@ struct IMView<P:IMProvider>: View {
             }
             
         } label: {
-                Image(systemName: "ladybug")
+            Image(systemName: "ladybug")
             
         }
     }

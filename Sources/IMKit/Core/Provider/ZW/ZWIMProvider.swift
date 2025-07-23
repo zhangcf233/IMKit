@@ -39,7 +39,7 @@ final class ZWIMProvider:BaseViewModel,IMProvider{
     @Published var status: IMClientStatus = .disconnected
     
     func connect() {
-        status = .connected
+        status = .connecting
         connection.start()
     }
     
