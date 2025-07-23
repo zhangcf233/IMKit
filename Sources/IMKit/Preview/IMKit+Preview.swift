@@ -13,7 +13,7 @@ struct Test: View {
     @State var select = 1
     
     
-    let provider = ZWIMProvider(DefaultIMConfig)
+    let provider = MockIMProvider(DefaultIMConfig)
     
     var body: some View {
         NavigationView {
