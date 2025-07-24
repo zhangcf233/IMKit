@@ -71,8 +71,8 @@ extension IMViewModel{
         }
     }
     
-    /// 置顶会话
-    func onTopConversion(_ c:Conversation){
+    /// 切换置顶状态
+    func onChangeTopConversion(_ c:Conversation){
         if let index = conversions.firstIndex(where: { $0.id == c.id }) {
             withAnimation {
                 conversions[index].isTop.toggle()

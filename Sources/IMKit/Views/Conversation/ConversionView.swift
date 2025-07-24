@@ -14,11 +14,11 @@ struct ConversitionView<P:IMProvider>: View {
     init(
         _ conversions: [Conversation],
         onDelete:@escaping OnActionType,
-        onTop:@escaping OnActionType
+        onChangeTop:@escaping OnActionType
     ) {
         self.conversions = conversions
         self.onDelete = onDelete
-        self.onTop = onTop
+        self.onChangeTop = onChangeTop
     }
     
     @Environment(\.imConfig.routeFlag) var flag
@@ -28,7 +28,7 @@ struct ConversitionView<P:IMProvider>: View {
     
     var onDelete:OnActionType
     
-    var onTop:OnActionType
+    var onChangeTop:OnActionType
     
     var body: some View {
         List {
@@ -46,9 +46,9 @@ struct ConversitionView<P:IMProvider>: View {
                         }
 
                         Button {
-                            onTop(c)
+                            onChangeTop(c)
                         } label: {
-                            Label("置顶", systemImage: "pin")
+                            Label("置顶", systemImage: c.isTop ? "pin.slash.fill" : "pin")
                         }
                         .tint(.yellow)
                     }

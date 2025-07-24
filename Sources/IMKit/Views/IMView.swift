@@ -49,7 +49,7 @@ public struct IMView<P:IMProvider>: View {
         ConversitionView<P>(
             vm.filteredConversations,
             onDelete: vm.onDeleteConversion,
-            onTop: vm.onTopConversion
+            onChangeTop: vm.onChangeTopConversion
         )
             .navigationBarTitle(
                 Text(vm.title)
