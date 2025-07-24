@@ -62,4 +62,21 @@ extension IMViewModel{
                 .contains(searchConversion.lowercased())
         }
     }
+    
+    /// 删除会话
+    func onDeleteConversion(_ c:Conversation){
+        
+        conversions.removeAll { c2 in
+            c2.id == c.id
+        }
+    }
+    
+    /// 置顶会话
+    func onTopConversion(_ c:Conversation){
+        if let index = conversions.firstIndex(where: { $0.id == c.id }) {
+            withAnimation {
+                conversions[index].isTop.toggle()
+            }
+        }
+    }
 }

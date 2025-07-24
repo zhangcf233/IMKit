@@ -27,7 +27,6 @@ struct Test: View {
                         Text("首页")
                     }
 
-                
                 IMView(mockProvider)
                     .tag(1)
                     .tabItem{

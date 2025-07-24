@@ -21,12 +21,6 @@ struct ChatHeaderView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    let avatar = DefaultAvatar
-    
-    let name = "这个人的名字很长很长很长这个人的名字很长很长很长这个人的名字很长很长很长这个人的名字很长很长很长这个人的名字很长很长很长"
-    
-    let memberCount = 4
-    
     var body: some View {
         HStack(spacing:0){
             
@@ -70,7 +64,9 @@ struct ChatHeaderView: View {
                 .padding(.horizontal,5)
                 .lineLimit(1)
             
-            Text("(\(memberCount))")
+            if conversion.memberCount > 1 {
+                Text("(\(conversion.memberCount))")
+            }
         }
         .font(.subheadline)
     }

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol IMProvider:BaseViewModel,ObservableObject{
+public protocol IMProvider:BaseViewModel,ObservableObject{
     
     init(_:IMConfig)
     

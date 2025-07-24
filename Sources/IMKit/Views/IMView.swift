@@ -9,9 +9,9 @@ import SwiftUI
 
 
 
-struct IMView<P:IMProvider>: View {
+public struct IMView<P:IMProvider>: View {
     
-    init(
+   public init(
         _ provider:P
     ){
         
@@ -28,7 +28,7 @@ struct IMView<P:IMProvider>: View {
         return provider.config
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationView {
             
             switch vm.status {
@@ -46,7 +46,11 @@ struct IMView<P:IMProvider>: View {
     
     /// 连接成功
     var successView:some View {
-        ConversitionView<P>(vm.filteredConversations)
+        ConversitionView<P>(
+            vm.filteredConversations,
+            onDelete: vm.onDeleteConversion,
+            onTop: vm.onTopConversion
+        )
             .navigationBarTitle(
                 Text(vm.title)
             )

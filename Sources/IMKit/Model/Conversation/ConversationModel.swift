@@ -42,6 +42,9 @@ public struct Conversation:Identifiable,Codable,Hashable {
     /// 草稿消息（未发送内容）
     public var draft: String?
     
+    /// 聊天人数
+    public var memberCount:Int
+    
     /// 初始化方法
     public init(
         id: String,
@@ -52,7 +55,8 @@ public struct Conversation:Identifiable,Codable,Hashable {
         lastMessageTime: Date,
         lastMessage: String,
         isTop: Bool = false,
-        draft: String? = nil
+        draft: String? = nil,
+        memberCount:Int = 1
     ) {
         self.id = id
         self.type = type
@@ -63,6 +67,7 @@ public struct Conversation:Identifiable,Codable,Hashable {
         self.unreadCount = unreadCount
         self.isTop = isTop
         self.draft = draft
+        self.memberCount = memberCount
     }
     
 }
@@ -73,7 +78,7 @@ public struct Conversation:Identifiable,Codable,Hashable {
 let DefaultConversation = Conversation(
     id: "u_1",
     type: .single,
-    name: "王五",
+    name: "1号好友",
     unreadCount: 1,
     avatar: DefaultAvatar,
     lastMessageTime:Date(),
@@ -84,7 +89,7 @@ let DefaultConversation = Conversation(
 let DefaultTopConversion = Conversation(
     id: "u_2",
     type: .single,
-    name: "张三",
+    name: "2号好友",
     unreadCount: 100,
     avatar: DefaultAvatar,
     lastMessageTime:Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
@@ -96,7 +101,7 @@ let DefaultTopConversion = Conversation(
 let DefaultConversion2 = Conversation(
     id: "u_3",
     type: .single,
-    name: "这个好友的昵称非常非常非常非常非常非常非常非常非常长",
+    name: "3号好友",
     unreadCount: 2,
     avatar: DefaultAvatar,
     lastMessageTime:Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 9, minute: 0))!,
@@ -108,16 +113,29 @@ let DefaultConversion2 = Conversation(
 let DefaultConversion3 = Conversation(
     id: "u_4",
     type: .single,
-    name: "这个好友的昵称非常非常非常非常非常非常非常非常非常长",
+    name: "4号好友",
     unreadCount: 21,
     avatar: DefaultAvatar,
     lastMessageTime:Calendar.current.date(byAdding: .day, value: -3, to: Date())!,
     lastMessage:  "这是一条很长很长很长很长很长很长很长很长很长很长的消息",
 )
 
+/// 群聊
+let DefaultConversionGroup = Conversation(
+    id: "g_4",
+    type: .group,
+    name: "4号群",
+    unreadCount: 19923,
+    avatar: DefaultAvatar,
+    lastMessageTime:Calendar.current.date(byAdding: .day, value: -3, to: Date())!,
+    lastMessage:  "这是最新的一条消息",
+    memberCount: 213
+)
+
 let DefaultConversions = [
     DefaultConversation,
     DefaultTopConversion,
     DefaultConversion2,
-    DefaultConversion3
+    DefaultConversion3,
+    DefaultConversionGroup
 ]
