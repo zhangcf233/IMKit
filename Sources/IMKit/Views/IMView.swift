@@ -103,22 +103,11 @@ public struct IMView<P:IMProvider>: View {
         
         VStack{
             Button("新增"){
-                let c = DefaultSession2
-                c.id = UUID().uuidString
-                c.name = "这是第\(vm.sessions.count)条会话"
-                vm.provider.store?.addOrUpdate(.session, [
-                    c
-                ])
-                
-                vm.updateSession()
+                vm.addSession()
             }
             
             
-            SessionView<P>(
-                $vm.sessions,
-                onDelete: vm.onDeleteSession,
-                onChangeTop: vm.onChangeTopSession
-            )
+            SessionView<P>(vm)
         }
         
         

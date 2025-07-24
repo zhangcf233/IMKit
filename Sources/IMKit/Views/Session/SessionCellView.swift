@@ -9,11 +9,11 @@ import SwiftUI
 
 struct SessionCellView: View {
     
-    init(_ conversion: Session) {
-        self.conversion = conversion
+    init(_ session: Session) {
+        self.session = session
     }
     
-    var conversion:Session
+    var session:Session
     
     let avatarSize = 50.0
     
@@ -31,37 +31,37 @@ struct SessionCellView: View {
         .listRowSeparator(.hidden)
         .contentShape(Rectangle())
         .background(
-            conversion.isTop
+            session.isTop
             ? Color(.systemGray).opacity(0.2)
             : Color(.systemBackground)
         )
     }
     
     var avatar:some View {
-        onlineImg(conversion.avatar)
+        onlineImg(session.avatar)
             .useAvatar()
-            .useBadge(conversion.unreadCount)
+            .useBadge(session.unreadCount)
     }
     
     var content:some View {
         VStack(alignment: .leading,spacing: 8) {
             HStack{
                 // 名称
-                Text(conversion.name)
+                Text(session.name)
                     .font(.headline)
                     .lineLimit(1)
                 
                 Spacer()
                 
                 // 时间
-                Text(conversion.lastMessageTime.formattedDisplayTime())
+                Text(session.lastMessageTime.formattedDisplayTime())
                     .font(.footnote)
                     .opacity(0.3)
             }
             
             
             /// 消息内容
-            Text(conversion.lastMessage)
+            Text(session.lastMessage)
                 .font(.subheadline)
                 .opacity(0.6)
                 .lineLimit(1)

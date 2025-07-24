@@ -19,7 +19,7 @@ class IMViewModel<P:IMProvider>:BaseViewModel {
         
         super.init()
         
-        self.updateSession()
+        self.loadSessions()
     }
     
     /// 自己的用户信息
@@ -51,7 +51,7 @@ extension IMViewModel{
     }
     
     /// 过滤搜索内容
-    var filteredConversations: [Session] {
+    var filteredSessions: [Session] {
         
         let result = searchConversion.isEmpty ? sessions : filterSearch()
         
@@ -98,7 +98,16 @@ extension IMViewModel{
     }
     
     /// 更新会话列表
-    func updateSession(){
+    func loadSessions(){
         self.sessions = provider.store?.getObjects(.session) ?? []
+        print("查询结果数量",sessions.count)
+    }
+    
+    func addSession(){
+        var c = DefaultSession2
+        c.id = UUID().uuidString
+        c.name = "这是第\(sessions.count)条会话"
+        sessions.append(c)
+        provider.store?.addOrUpdate(.session, sessions)
     }
 }

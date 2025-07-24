@@ -9,7 +9,7 @@ import Foundation
 import WCDBSwift
 
 
-public final class Session:TableCodable {
+public struct Session: TableCodable {
     
     /// 初始化方法
     public init(
