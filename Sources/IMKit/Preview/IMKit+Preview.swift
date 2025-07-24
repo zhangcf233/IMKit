@@ -30,7 +30,7 @@ struct Test: View {
                 IMView(mockProvider)
                     .tag(1)
                     .tabItem{
-                        Image(systemName: "bubble")
+                        Image(systemName: "text.bubble")
                         Text("消息")
                     }
                 

@@ -29,30 +29,56 @@ public struct IMView<P:IMProvider>: View {
     }
     
     public var body: some View {
-        NavigationView {
-            
+        NavigationView{
             switch vm.status {
                 
             case .success:
-                successView
-                    
+                if #available(iOS 16.0, *){
+                    ios16PlusView()
+                }else{
+                    ios15View()
+                }
+                
             default:
                 otherView
             }
-            
         }
         .useRoute(config.routeFlag)
     }
     
-    /// 连接成功
-    var successView:some View {
-        ConversitionView<P>(
-            vm.filteredConversations,
-            onDelete: vm.onDeleteConversion,
-            onChangeTop: vm.onChangeTopConversion
-        )
+    /// ios15 视图
+    @ViewBuilder
+    func ios15View()->some View {
+        let titleBarHeight = 50.0
+        let paddingTopHeight = titleBarHeight + UIDevice.safeDistanceTop()
+        VStack(spacing: 0){
+            ZStack{
+                successView
+                    .padding(.top,paddingTopHeight)
+            }
+            .overlay(alignment:.top) {
+                VStack(spacing: 0){
+                    HStack{
+                        Spacer()
+                        titleView()
+                            .font(.headline)
+                        Spacer()
+                    }
+                }
+                .frame(height: paddingTopHeight)
+                .background(.ultraThinMaterial)
+            }
+        }
+        .hiddenNavigationBarSpace()
+        .ignoresSafeArea(edges:.top)
+    }
+    
+    /// ios16 以上视图
+    @ViewBuilder
+    func ios16PlusView()->some View{
+        successView
             .navigationBarTitle(
-                Text(vm.title)
+                titleView()
             )
             .navigationBarTitleDisplayMode(.inline)
             .searchable(
@@ -64,6 +90,21 @@ public struct IMView<P:IMProvider>: View {
                     debugMenuView
                 }
             }
+    }
+    
+    /// 标题视图
+    @ViewBuilder
+    func titleView()->Text{
+        Text(vm.title)
+    }
+    
+    /// 连接成功
+    var successView:some View {
+        ConversitionView<P>(
+            vm.filteredConversations,
+            onDelete: vm.onDeleteConversion,
+            onChangeTop: vm.onChangeTopConversion
+        )
     }
     
     /// 其他场景页面
