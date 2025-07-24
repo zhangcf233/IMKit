@@ -15,8 +15,8 @@ struct ChatHeaderView: View {
     
     @ObservedObject var vm:ChatViewModel
     
-    var conversion:Conversation{
-        return vm.conversion
+    var session:Session{
+        return vm.session
     }
     
     @Environment(\.dismiss) var dismiss
@@ -42,7 +42,7 @@ struct ChatHeaderView: View {
             
             backBtn
             
-            onlineImg(conversion.avatar)
+            onlineImg(session.avatar)
                 .useAvatar(.mini)
             
             titleView
@@ -60,12 +60,12 @@ struct ChatHeaderView: View {
     /// 聊天标题
     var titleView:some View {
         HStack(spacing: 0){
-            Text(conversion.name)
+            Text(session.name)
                 .padding(.horizontal,5)
                 .lineLimit(1)
             
-            if conversion.memberCount > 1 {
-                Text("(\(conversion.memberCount))")
+            if session.memberCount > 1 {
+                Text("(\(session.memberCount))")
             }
         }
         .font(.subheadline)
@@ -95,6 +95,5 @@ struct ChatHeaderView: View {
 }
 
 #Preview {
-    @StateObject var vm = ChatViewModel( DefaultConversion2)
-    ChatHeaderView(vm)
+    ChatHeaderView(ChatViewModel( DefaultSession2))
 }

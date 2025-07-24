@@ -6,49 +6,15 @@
 //
 
 import Foundation
+import WCDBSwift
 
-public enum ConversationType:String,Codable {
-    /// 单聊
-    case single
-    /// 群聊
-    case group
-}
 
-public struct Conversation:Identifiable,Codable,Hashable {
-    /// 会话唯一 ID
-    public let id: String
-    
-    /// 会话类型
-    public let type:ConversationType
-    
-    /// 会话名称（用户昵称 or 群名）
-    public let name: String
-
-    /// 头像 URL（用户 or 群组）
-    public let avatar: URL
-
-    /// 最近一条消息摘要
-    public let lastMessage: String
-
-    /// 最近消息的时间（用于排序）
-    public let lastMessageTime: Date
-
-    /// 未读消息数量
-    public var unreadCount: Int
-
-    /// 是否置顶
-    public var isTop: Bool
-
-    /// 草稿消息（未发送内容）
-    public var draft: String?
-    
-    /// 聊天人数
-    public var memberCount:Int
+public final class Session:TableCodable {
     
     /// 初始化方法
     public init(
         id: String,
-        type: ConversationType,
+        type: SessionType,
         name: String,
         unreadCount: Int,
         avatar: URL,
@@ -70,12 +36,68 @@ public struct Conversation:Identifiable,Codable,Hashable {
         self.memberCount = memberCount
     }
     
+    /// 会话唯一 ID
+    public var id: String = ""
+    
+    /// 会话类型
+    public var type:SessionType = .single
+    
+    /// 会话名称（用户昵称 or 群名）
+    public var name: String = "默认会话名称"
+
+    /// 头像 URL（用户 or 群组）
+    public var avatar: URL = DefaultAvatar
+
+    /// 最近一条消息摘要
+    public var lastMessage: String = "默认最新消息"
+
+    /// 最近消息的时间（用于排序）
+    public var lastMessageTime: Date = .now
+
+    /// 未读消息数量
+    public var unreadCount: Int = 1
+
+    /// 是否置顶
+    public var isTop: Bool = false
+
+    /// 草稿消息（未发送内容）
+    public var draft: String? = nil
+    
+    /// 聊天人数
+    public var memberCount:Int = 1
+    
+    
+    public enum CodingKeys:String,CodingTableKey {
+        public typealias Root = Session
+    
+        case id
+        case type
+        case name
+        case avatar
+        case lastMessage
+        case lastMessageTime
+        case unreadCount
+        case isTop
+        case draft
+        case memberCount
+    
+        
+        public static let objectRelationalMapping = TableBinding(CodingKeys.self) {
+            BindColumnConstraint(
+                id,
+                isPrimary: true, // 设为主键
+                onConflict: .Replace, // 冲突时更新
+                isNotNull: false, // 不可为空
+                isUnique: true // 字段唯一
+            )
+        }
+    }
 }
 
 
 
 /// 示例消息
-let DefaultConversation = Conversation(
+let DefaultSession = Session(
     id: "u_1",
     type: .single,
     name: "1号好友",
@@ -86,7 +108,7 @@ let DefaultConversation = Conversation(
 )
 
 /// 置顶消息
-let DefaultTopConversion = Conversation(
+let DefaultTopSession = Session(
     id: "u_2",
     type: .single,
     name: "2号好友",
@@ -98,7 +120,7 @@ let DefaultTopConversion = Conversation(
 )
 
 /// 置顶消息
-let DefaultConversion2 = Conversation(
+let DefaultSession2 = Session(
     id: "u_3",
     type: .single,
     name: "3号好友",
@@ -110,7 +132,7 @@ let DefaultConversion2 = Conversation(
 )
 
 /// 置顶消息
-let DefaultConversion3 = Conversation(
+let DefaultSession3 = Session(
     id: "u_4",
     type: .single,
     name: "4号好友",
@@ -121,7 +143,7 @@ let DefaultConversion3 = Conversation(
 )
 
 /// 群聊
-let DefaultConversionGroup = Conversation(
+let DefaultSessionGroup = Session(
     id: "g_4",
     type: .group,
     name: "4号群",
@@ -132,10 +154,26 @@ let DefaultConversionGroup = Conversation(
     memberCount: 213
 )
 
-let DefaultConversions = [
-    DefaultConversation,
-    DefaultTopConversion,
-    DefaultConversion2,
-    DefaultConversion3,
-    DefaultConversionGroup
+/// 群聊
+let MockSessionGroup = Session(
+    id: "g_4",
+    type: .group,
+    name: "4号群-Mock",
+    unreadCount: 19923,
+    avatar: DefaultAvatarMock,
+    lastMessageTime:Calendar.current.date(byAdding: .day, value: -3, to: Date())!,
+    lastMessage:  "这是最新的一条消息",
+    memberCount: 213
+)
+
+let MockSessions = [
+    MockSessionGroup
+]
+
+let DefaultSessions = [
+    DefaultSession,
+    DefaultTopSession,
+    DefaultSession2,
+    DefaultSession3,
+    DefaultSessionGroup
 ]

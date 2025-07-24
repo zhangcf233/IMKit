@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-public protocol IMProvider:BaseViewModel,ObservableObject{
+public protocol IMProvider:BaseErrorProtocol{
     
     init(_:IMConfig)
     
@@ -29,4 +29,7 @@ public protocol IMProvider:BaseViewModel,ObservableObject{
     
     /// 获取用户信息
     func getUserInfo()->User
+
+    /// 数据库服务
+    var store:WCDBService? {get}
 }

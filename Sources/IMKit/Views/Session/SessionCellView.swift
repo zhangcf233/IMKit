@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct ConversionCellView: View {
+struct SessionCellView: View {
     
-    init(_ conversion: Conversation) {
+    init(_ conversion: Session) {
         self.conversion = conversion
     }
     
-    var conversion:Conversation
+    var conversion:Session
     
     let avatarSize = 50.0
     
@@ -70,7 +70,7 @@ struct ConversionCellView: View {
 }
 
 #Preview {
-    ConversionCellView(
-        DefaultConversation
+    SessionCellView(
+        DefaultSession
     )
 }

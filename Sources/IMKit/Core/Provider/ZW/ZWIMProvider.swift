@@ -11,6 +11,9 @@ import SwiftUI
 
 final class ZWIMProvider:BaseViewModel,IMProvider{
     
+    var store: WCDBService?
+    
+    
     public init(_ config:IMConfig){
         
         self.config = config
@@ -62,5 +65,7 @@ final class ZWIMProvider:BaseViewModel,IMProvider{
         return User(id: "123", name: "123", avatar:DefaultAvatar2)
     }
     
-    
+    func getSession() -> [Session] {
+        return DefaultSessions
+    }
 }

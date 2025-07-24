@@ -9,11 +9,11 @@ import SwiftUI
 
 public class ChatViewModel:BaseViewModel{
     
-    init(_ conversion: Conversation) {
-        self.conversion = conversion
+    init(_ session: Session) {
+        self.session = session
     }
     
-    var conversion:Conversation
+    var session:Session
 
     /// 输入框文本
     @Published var text = ""

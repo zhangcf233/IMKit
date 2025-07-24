@@ -13,3 +13,6 @@ public struct User:Identifiable,Codable,Hashable {
     public var name:String
     public var avatar:URL
 }
+
+
+let DefaultUser = User(id: "defalut.user", name: "默认用户", avatar: DefaultAvatar)

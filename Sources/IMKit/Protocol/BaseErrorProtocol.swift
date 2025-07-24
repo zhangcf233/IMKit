@@ -8,7 +8,7 @@
 import Foundation
 
 /// 默认的异常信息协议
-protocol BaseErrorProtocol:ObservableObject{
+public protocol BaseErrorProtocol:ObservableObject{
     /// 异常消息
     var errorMessage:String? {get set}
     /// 设置消息

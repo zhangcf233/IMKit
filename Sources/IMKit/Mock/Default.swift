@@ -7,9 +7,13 @@
 
 import Foundation
 
-public let DefaultAvatarUrl = "https://dummyimage.com/100x100/000/fff&text=avatar"
+public let DefaultAvatarDomain = "https://dummyimage.com/100x100/000/fff&text="
+
+public let DefaultAvatarUrl = "\(DefaultAvatarDomain)avatar"
 
 public let DefaultAvatar = URL(string: DefaultAvatarUrl)!
+
+public let DefaultAvatarMock = URL(string: "\(DefaultAvatarDomain)mock")!
 
 public let DefaultAvatar2 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user2")!
 public let DefaultAvatar3 = URL(string: "https://dummyimage.com/100x100/000/fff&text=user3")!

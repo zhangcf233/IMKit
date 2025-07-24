@@ -100,11 +100,28 @@ public struct IMView<P:IMProvider>: View {
     
     /// 连接成功
     var successView:some View {
-        ConversitionView<P>(
-            vm.filteredConversations,
-            onDelete: vm.onDeleteConversion,
-            onChangeTop: vm.onChangeTopConversion
-        )
+        
+        VStack{
+            Button("新增"){
+                let c = DefaultSession2
+                c.id = UUID().uuidString
+                c.name = "这是第\(vm.sessions.count)条会话"
+                vm.provider.store?.addOrUpdate(.session, [
+                    c
+                ])
+                
+                vm.updateSession()
+            }
+            
+            
+            SessionView<P>(
+                $vm.sessions,
+                onDelete: vm.onDeleteSession,
+                onChangeTop: vm.onChangeTopSession
+            )
+        }
+        
+        
     }
     
     /// 其他场景页面

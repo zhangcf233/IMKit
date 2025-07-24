@@ -19,6 +19,7 @@ let package = Package(
         .package(url: "https://github.com/onevcat/Kingfisher", from: "7.9.1"),
         .package(url: "https://github.com/moozzyk/SignalR-Client-Swift.git", from: "1.1.0"),
         .package(url: "https://github.com/kakaopensource/KakaJSON", from: "1.1.2"),
+        .package(url: "https://github.com/Tencent/wcdb", exact: "2.1.13"),
     ],
     targets: [
         .target(
@@ -27,6 +28,7 @@ let package = Package(
                 "KakaJSON",
                 "NavigationViewKit",
                 "Kingfisher",
+                .product(name: "WCDBSwift", package: "wcdb"),
                 .product(name: "SignalRClient", package: "signalr-client-swift"),
             ],
             resources: [

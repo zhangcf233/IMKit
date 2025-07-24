@@ -9,6 +9,8 @@ import Foundation
 
 /// 模拟供应商
 public final class MockIMProvider:BaseViewModel,IMProvider {
+    
+    
     public init(_ config: IMConfig) {
         self.config = config
         self.name = "本地模拟"
@@ -32,11 +34,17 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
     @Published
     public var status: IMStatus = .disconnected
     
+    public var store:WCDBService?
+}
+
+extension MockIMProvider {
+    
+    public func initDB(_ userId:String){
+        store = WCDBService(userId)
+    }
+    
     public func connect() {
         self.status = .success
-//        setTimeOut(time: 3) {
-//            self.status = .success
-//        }
     }
     
     public  func disconnect() {
@@ -44,8 +52,18 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
     }
     
     public func getUserInfo()->User {
-        return User(id: "1", name: "测试账号", avatar: DefaultAvatar4)
+        let user =  User(
+            id: "mock.user",
+            name: "模拟用户",
+            avatar: DefaultAvatarMock
+        )
+        
+        self.initDB(user.id)
+        
+        return user
     }
     
-    
+    public func getSessions() -> [Session] {
+        return store?.getObjects(.session) ?? []
+    }
 }

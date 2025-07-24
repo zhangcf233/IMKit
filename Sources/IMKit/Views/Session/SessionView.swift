@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct ConversitionView<P:IMProvider>: View {
+struct SessionView<P:IMProvider>: View {
     
-    typealias OnActionType = (_:Conversation)->Void
+    typealias OnActionType = (_:Session)->Void
     
     init(
-        _ conversions: [Conversation],
+        _ sessions: Binding<[Session]>,
         onDelete:@escaping OnActionType,
         onChangeTop:@escaping OnActionType
     ) {
-        self.conversions = conversions
+        _list = Binding(projectedValue: sessions)
         self.onDelete = onDelete
         self.onChangeTop = onChangeTop
     }
@@ -24,7 +24,8 @@ struct ConversitionView<P:IMProvider>: View {
     @Environment(\.imConfig.routeFlag) var flag
     @Environment(\.navigationManager.wrappedValue) var route
     
-    var conversions:[Conversation]
+    @Binding
+    var list:[Session]
     
     var onDelete:OnActionType
     
@@ -32,9 +33,10 @@ struct ConversitionView<P:IMProvider>: View {
     
     var body: some View {
         List {
-            ForEach(conversions){ c in
+            
+            ForEach(list,id: \.id){ c in
                 
-                ConversionCellView(c)
+                SessionCellView(c)
                     .to {
                         ChatView(c)
                     }

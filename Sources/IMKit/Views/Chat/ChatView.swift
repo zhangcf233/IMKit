@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ChatView:View {
     
-    init(_ conversion:Conversation) {
+    init(_ session:Session) {
         
-        _vm = StateObject(wrappedValue: ChatViewModel(conversion))
+        _vm = StateObject(wrappedValue: ChatViewModel(session))
     }
     
     @StateObject var vm:ChatViewModel
@@ -38,6 +38,6 @@ struct ChatView:View {
 }
 
 #Preview {
-    let c = DefaultConversion2
+    let c = DefaultSession2
     ChatView(c)
 }
