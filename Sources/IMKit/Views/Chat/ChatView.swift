@@ -9,11 +9,16 @@ import SwiftUI
 
 struct ChatView:View {
     
-    @StateObject var vm = ChatViewModel()
+    init(_ conversion:Conversation) {
+        
+        _vm = StateObject(wrappedValue: ChatViewModel(conversion))
+    }
+    
+    @StateObject var vm:ChatViewModel
     
     var body:some View {
         VStack(spacing:0){
-            ChatHeaderView()
+            ChatHeaderView(vm)
             
             Divider()
             
@@ -33,5 +38,6 @@ struct ChatView:View {
 }
 
 #Preview {
-    ChatView()
+    let c = DefaultConversion2
+    ChatView(c)
 }

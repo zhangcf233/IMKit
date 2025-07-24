@@ -7,23 +7,26 @@
 
 import SwiftUI
 
+
+
 struct IMView<P:IMProvider>: View {
-    
-    @Environment(\.imConfig) var config
     
     init(
         _ provider:P
     ){
         
-        _provider = StateObject(wrappedValue: provider )
+        _provider = StateObject(wrappedValue: provider)
         
         _vm = StateObject(wrappedValue: IMViewModel(provider))
     }
     
     @StateObject var vm:IMViewModel<P>
     
-    @StateObject var provider:P
+    @StateObject var provider: P
     
+    var config:IMConfig {
+        return provider.config
+    }
     
     var body: some View {
         NavigationView {
@@ -43,7 +46,7 @@ struct IMView<P:IMProvider>: View {
     
     /// 连接成功
     var successView:some View {
-        ConversitionView(vm.filteredConversations)
+        ConversitionView<P>(vm.filteredConversations)
             .navigationBarTitle(
                 Text(vm.title)
             )

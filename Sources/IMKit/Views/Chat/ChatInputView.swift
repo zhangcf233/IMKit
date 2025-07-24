@@ -138,6 +138,7 @@ struct ChatInputView:View {
 }
 
 #Preview {
-    @StateObject var vm = ChatViewModel()
+    let c = DefaultConversion2
+    @StateObject var vm = ChatViewModel( c)
     ChatInputView(vm)
 }

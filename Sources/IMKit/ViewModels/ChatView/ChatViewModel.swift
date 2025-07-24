@@ -8,6 +8,12 @@
 import SwiftUI
 
 public class ChatViewModel:BaseViewModel{
+    
+    init(_ conversion: Conversation) {
+        self.conversion = conversion
+    }
+    
+    var conversion:Conversation
 
     /// 输入框文本
     @Published var text = ""
@@ -113,7 +119,8 @@ extension ChatViewModel {
         withAnimation {
             isOpenExtend.toggle()
             if isOpenExtend {
-                setTimeOut(time: 0.1) {
+                setTimeOut {
+                    self.scrollToBottom()
                     self.cancelFocus()
                 }
             }
@@ -136,7 +143,8 @@ extension ChatViewModel {
             isOpenFace.toggle()
             
             if isOpenFace {
-                setTimeOut(time: 0.1) {
+                setTimeOut{
+                    self.scrollToBottom()
                     self.cancelFocus()
                 }
             }

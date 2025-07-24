@@ -9,6 +9,16 @@ import SwiftUI
 
 struct ChatHeaderView: View {
     
+    init(_ vm: ChatViewModel) {
+        _vm = ObservedObject(wrappedValue: vm)
+    }
+    
+    @ObservedObject var vm:ChatViewModel
+    
+    var conversion:Conversation{
+        return vm.conversion
+    }
+    
     @Environment(\.dismiss) var dismiss
     
     let avatar = DefaultAvatar
@@ -38,7 +48,7 @@ struct ChatHeaderView: View {
             
             backBtn
             
-            onlineImg(avatar)
+            onlineImg(conversion.avatar)
                 .useAvatar(.mini)
             
             titleView
@@ -56,7 +66,7 @@ struct ChatHeaderView: View {
     /// 聊天标题
     var titleView:some View {
         HStack(spacing: 0){
-            Text(name)
+            Text(conversion.name)
                 .padding(.horizontal,5)
                 .lineLimit(1)
             
@@ -89,5 +99,6 @@ struct ChatHeaderView: View {
 }
 
 #Preview {
-    ChatHeaderView()
+    @StateObject var vm = ChatViewModel( DefaultConversion2)
+    ChatHeaderView(vm)
 }

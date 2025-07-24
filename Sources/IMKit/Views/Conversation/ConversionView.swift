@@ -7,11 +7,14 @@
 
 import SwiftUI
 
-struct ConversitionView: View {
+struct ConversitionView<P:IMProvider>: View {
     
-    init(_ conversions: [Conversation]) {
+    init(
+        _ conversions: [Conversation]
+    ) {
         self.conversions = conversions
     }
+    
     @Environment(\.imConfig.routeFlag) var flag
     @Environment(\.navigationManager.wrappedValue) var route
     
@@ -22,7 +25,7 @@ struct ConversitionView: View {
             ForEach(conversions){ c in
                 ConversionCellView(c)
                     .to {
-                        ChatView()
+                        ChatView(c)
                     }
             }
         }
