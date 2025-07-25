@@ -11,22 +11,16 @@ import WCDBSwift
 
 public final class WCDBService:BaseViewModel {
     
-    init(_ userId: String) {
-        self.userId = userId
+    init(_ dbName: String = "defalut") {
+        self.dbName = dbName
         super.init()
-        self.connectDB()
     }
     
     /// 数据库
     var db:Database?
     
-    /// 用户编号
-    var userId:String
-    
     /// 数据库名称
-    var dbName:String {
-        return "\(userId).sqlite"
-    }
+    var dbName:String
     
     /// 连接数据库
     func connectDB(){
@@ -35,7 +29,7 @@ public final class WCDBService:BaseViewModel {
                 in:.userDomainMask,
                 appropriateFor: nil,
                 create: true
-            ).appendingPathComponent(dbName) else {
+            ).appendingPathComponent("\(dbName).sqlite") else {
             
             self.setError("创建数据库路径失败")
             return
@@ -57,6 +51,12 @@ public final class WCDBService:BaseViewModel {
             table:IMTable.session.rawValue,
             of: Session.self
         )
+    }
+    
+    /// 初始化表
+    public func initTable(_ dbName:String){
+        self.dbName = dbName
+        self.connectDB()
     }
 }
 

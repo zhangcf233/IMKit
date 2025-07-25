@@ -110,6 +110,9 @@ public struct IMView<P:IMProvider>: View {
             
             SessionView<P>(vm)
         }
+        .onAppear{
+            vm.loadSessions()
+        }
         
         
     }
@@ -118,14 +121,12 @@ public struct IMView<P:IMProvider>: View {
     var otherView:some View{
         VStack{
             switch vm.status{
-            case .connecting:
-                ProgressView(vm.status.name)
             case .disconnected,.fail,.reconnect:
                 reconnectView
             case .authFailed:
                 loginView
             default:
-                EmptyView()
+                ProgressView(vm.status.name)
             }
             
         }

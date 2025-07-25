@@ -14,8 +14,6 @@ class IMViewModel<P:IMProvider>:BaseViewModel {
         self.provider = provider
         
         super.init()
-        
-        self.loadSessions()
     }
     
     /// 自己的用户信息
@@ -80,7 +78,7 @@ extension IMViewModel{
         }
         
         
-        provider.store?.remove(.session,where: Session.Properties.id == c.id)
+        provider.store.remove(.session,where: Session.Properties.id == c.id)
         
         print("删除会话",sessions.count)
         
@@ -97,8 +95,9 @@ extension IMViewModel{
     
     /// 更新会话列表
     func loadSessions(){
-        self.sessions = provider.store?.getObjects(.session) ?? []
+        self.sessions = provider.store.getObjects(.session) ?? []
         print("查询结果数量",sessions.count)
+        
     }
     
     func addSession(){
@@ -106,6 +105,6 @@ extension IMViewModel{
         c.id = UUID().uuidString
         c.name = "这是第\(sessions.count)条会话"
         sessions.append(c)
-        provider.store?.addOrUpdate(.session, sessions)
+        provider.store.addOrUpdate(.session, sessions)
     }
 }

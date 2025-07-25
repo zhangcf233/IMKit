@@ -22,7 +22,7 @@ public protocol IMProvider:BaseErrorProtocol{
     var status: IMStatus {get}
     
     /// 数据库服务
-    var store:WCDBService? {get}
+    var store:WCDBService {get}
     
     /// 自己的用户信息
     var mine:User {get}

@@ -11,19 +11,8 @@ import SwiftUI
 
 public final class ZWIMProvider:BaseViewModel,IMProvider{
     
-    public func onLoginSuccess(_ config: IMConfig) {
-        Task{
-            await self.start(config)
-        }
-    }
-    
-    
-   public  var store: WCDBService?
-    
-    var http: ZWHttpService
-    
-    
-    public init(_ config:IMConfig){
+    /// 初始化
+    public init(_ config:IMConfig) {
         
         self.config = config
         
@@ -35,7 +24,13 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
         self.onLoginSuccess(config)
     }
     
-    /// 代理
+    /// 数据库
+    public var store = WCDBService()
+    
+    /// 网络请求
+    public var http: ZWHttpService
+    
+    /// 长链接代理
     private var signalRDelegate:SignalRDelegate?
     
     /// 连接设置
@@ -44,7 +39,7 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
     /// 服务商名称
     public let name = "正万"
     
-    /// IM 服务
+    /// 长链接
     public var service:SignalRService?
     
     /// 连接状态
@@ -56,30 +51,34 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
     public var mine:User = DefaultUser
     
     /// 启动
-    public func start(_ config:IMConfig) async {
-        self.config = config
+    public func start() async {
+        debugPrint("*** 1. 启动")
+        /// 切换状态
+        self.status = .loadingUserInfo
+        debugPrint("*** 2. 获取用户信息")
+        
+        /// 获取用户信息 用于启动数据库
+        guard let _ = await self.getUserInfo() else {
+            return
+        }
+        
+        debugPrint("*** 3. 更新用户信息成功",mine)
+        
+        /// 初始化数据库
+        store.initTable(mine.id)
+        
+        debugPrint("*** 4. 切换数据库",store.dbName)
         
         /// 初始化代理
         signalRDelegate = SignalRDelegate(self)
         
         /// 初始化服务
-        self.service = SignalRService( 
+        self.service = SignalRService(
             provider: self,
             isDebug: config.isDebug,
             delegate:signalRDelegate!
         )
-        
-        /// 获取用户信息 用于启动数据库
-        guard let user = await self.getUserInfo() else {
-            return
-        }
-        
-        mine = user
-        
-        store = WCDBService(user.id)
-        
     }
-    
     
     /// 发起连接
     public func connect() {
@@ -91,14 +90,16 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
     public func disconnect() {
         service?.stop()
     }
-
+    
+    /// 获取用户信息
     public func getUserInfo () async ->  User?  {
         var mine:User? = nil
         
         await http.send(.getUserInfo) { (result: Result<ZWUserInfo, RequestError>) in
             switch result {
             case .success(let user):
-                mine = User(fromZWUserInfo: user)
+                self.mine = User(fromZWUserInfo: user)
+                mine = self.mine
             case .failure(let err):
                 switch err{
                 case .authFailed :
@@ -114,7 +115,16 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
         
     }
     
+    /// 获取会话列表
     public func getSession() -> [Session] {
-        return DefaultSessions
+        debugPrint("*** 获取会话列表",store.dbName)
+        return store.getObjects(.session) ?? []
+    }
+    
+    /// 登录成功钩子
+    public func onLoginSuccess(_ config: IMConfig) {
+        Task{
+            await self.start()
+        }
     }
 }

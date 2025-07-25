@@ -42,7 +42,7 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
     @Published
     public var mine: User = DefaultUser
     
-    public var store:WCDBService?
+    public var store =  WCDBService()
 }
 
 extension MockIMProvider {
@@ -74,6 +74,6 @@ extension MockIMProvider {
     }
     
     public func getSessions() -> [Session] {
-        return store?.getObjects(.session) ?? []
+        return store.getObjects(.session) ?? []
     }
 }
