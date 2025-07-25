@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SessionView<P:IMProvider>: View {
+struct SessionListView<P:IMProvider>: View {
     
     init(
         _ vm:IMViewModel<P>
@@ -22,8 +22,15 @@ struct SessionView<P:IMProvider>: View {
 
     
     var body: some View {
+        if vm.filteredSessions.isEmpty {
+            IMEmpty.list
+        }else{
+            list
+        }
+    }
+    
+    var list:some View {
         List {
-            
             ForEach(vm.filteredSessions,id: \.id){ item in
                 
                 SessionCellView(item)
@@ -45,9 +52,8 @@ struct SessionView<P:IMProvider>: View {
                         .tint(.yellow)
                     }
             }
-            
-            
         }
         .listStyle(.plain)
     }
+    
 }
