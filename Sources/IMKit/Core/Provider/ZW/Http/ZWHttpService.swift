@@ -22,8 +22,14 @@ public class ZWHttpService:BaseViewModel{
         done: @escaping (Result<T, RequestError>) -> Void
     ) async {
         do {
+            
             guard let url = URL(string: config.url + to.path) else {
                 done(.failure(.invalidURL))
+                return
+            }
+            
+            if config.token.isEmpty {
+                done(.failure(.tokenNull))
                 return
             }
 
@@ -36,6 +42,8 @@ public class ZWHttpService:BaseViewModel{
                 done(.failure(.jsonFailed))
                 return
             }
+            
+            debugPrint("*** 接口返回json",json)
 
             let auth = json.kj.model(ZWAuthFailed.self)
             
@@ -44,7 +52,6 @@ public class ZWHttpService:BaseViewModel{
                 return
             }
             
-
             guard let model = json.kj.model(type: T.self) as? T else {
                 done(.failure(.modelFailed))
                 return

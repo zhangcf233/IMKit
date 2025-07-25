@@ -30,6 +30,8 @@ public struct IMView<P:IMProvider>: View {
     
     public var body: some View {
         NavigationView{
+            
+            
             switch vm.status {
                 
             case .success:
@@ -42,6 +44,9 @@ public struct IMView<P:IMProvider>: View {
             default:
                 otherView
             }
+            
+            
+            
         }
         .useRoute(config.routeFlag)
         
@@ -195,6 +200,18 @@ public struct IMView<P:IMProvider>: View {
                 callEvent(.IM_OnAuthFailed)
             }
             .buttonStyle(.bordered)
+        }
+    }
+    
+    /// 异常页面
+    @ViewBuilder
+    func errorView(_ message:String)->some View {
+        VStack{
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 100))
+                .foregroundStyle(.yellow)
+            
+            Text(message)
         }
     }
 }

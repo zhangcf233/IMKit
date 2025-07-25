@@ -12,7 +12,7 @@ import Foundation
 ///   - domain: IM 服务地址（如 https://im.example.com）
 ///   - token: 用户身份令牌，IMKit 内部将通过 token 自动拉取用户信息
 ///   - enableDebugLog: 开启调试模式 将打印完整 log
-public final class IMConfig:IMConfigProtocol{
+public struct IMConfig:IMConfigProtocol{
     
     
     // MARK: 初始化

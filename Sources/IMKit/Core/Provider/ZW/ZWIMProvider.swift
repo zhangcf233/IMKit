@@ -43,19 +43,30 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
     public var service:SignalRService?
     
     /// 连接状态
-    @Published public
-    var status: IMStatus = .disconnected
+    @Published
+    public var status: IMStatus = .disconnected
     
     /// 自己的用户信息
     @Published
     public var mine:User = DefaultUser
     
+}
+
+extension ZWIMProvider {
+    
     /// 启动
-    public func start() async {
-        debugPrint("*** 1. 启动")
+    public func start(_ config:IMConfig) async {
+        
+        /// 更新配置
+        self.config = config
+        
+        debugPrint("*** 1. 启动",config.token)
         /// 切换状态
         self.status = .loadingUserInfo
-        debugPrint("*** 2. 获取用户信息")
+        debugPrint("*** 2. 获取用户信息",config)
+        
+        /// 更新配置
+        http.config = config
         
         /// 获取用户信息 用于启动数据库
         guard let _ = await self.getUserInfo() else {
@@ -84,6 +95,7 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
     public func connect() {
         self.status = .connecting
         service?.start()
+        
     }
     
     /// 断开链接
@@ -100,14 +112,8 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
             case .success(let user):
                 self.mine = User(fromZWUserInfo: user)
                 mine = self.mine
-            case .failure(let err):
-                switch err{
-                case .authFailed :
-                    self.status = .authFailed
-                default:
-                    self.status = .fail
-                    self.setError(err.errorDescription)
-                }
+            case .failure(_):
+                self.status = .authFailed
             }
         }
         
@@ -124,7 +130,7 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
     /// 登录成功钩子
     public func onLoginSuccess(_ config: IMConfig) {
         Task{
-            await self.start()
+            await self.start(config)
         }
     }
 }

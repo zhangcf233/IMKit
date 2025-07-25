@@ -17,7 +17,7 @@ public struct ZWAuthFailed:Convertible {
     
     var Status = false
     var Message = ""
-    var Data = 401
+    var Data = 0
 }
 
 /// 用户信息
