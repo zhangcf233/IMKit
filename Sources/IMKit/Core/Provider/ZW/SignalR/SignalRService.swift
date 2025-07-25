@@ -12,10 +12,12 @@ public class SignalRService {
     
     /// 初始化
     public init(
-        url: URL,
+        _ config:IMConfig,
         isDebug:Bool = false,
         delegate:any HubConnectionDelegate
     ) {
+        
+        let url = URL(string: "\(config.url)/chatHub?AppToken=\(config.token)")!
         
         /// 设置链接
         connection = HubConnectionBuilder(url: url)
@@ -25,6 +27,9 @@ public class SignalRService {
             
         /// 开启监听
         openListen()
+        
+        /// 启动
+        self.start()
     }
     
     /// 开启监听
