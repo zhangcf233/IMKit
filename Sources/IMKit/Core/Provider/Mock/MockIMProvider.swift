@@ -26,8 +26,7 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
         self.connect()
     }
     
-    public func onLoginSuccess(_ config: IMConfig) {
-        self.config = config
+    public func onLoginSuccess() {
         self.connect()
     }
     

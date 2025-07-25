@@ -34,7 +34,7 @@ public protocol IMProvider:BaseErrorProtocol{
     func disconnect()
     
     /// 登录成功
-    func onLoginSuccess(_:IMConfig)
+    func onLoginSuccess()
     
     /// 获取用户信息
     func getUserInfo() async -> User?

@@ -8,7 +8,7 @@
 import Foundation
 
 /// 配置协议
-public protocol IMConfigProtocol {
+public protocol IMConfigProtocol:ObservableObject {
     /// 请求地址
     var url:String {get}
     /// token

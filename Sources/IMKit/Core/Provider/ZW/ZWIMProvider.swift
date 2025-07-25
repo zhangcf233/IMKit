@@ -21,7 +21,7 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
         
         super.init()
         
-        self.onLoginSuccess(config)
+        self.onLoginSuccess()
     }
     
     /// 数据库
@@ -55,18 +55,12 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
 extension ZWIMProvider {
     
     /// 启动
-    public func start(_ config:IMConfig) async {
-        
-        /// 更新配置
-        self.config = config
+    public func start() async {
         
         debugPrint("*** 1. 启动",config.token)
         /// 切换状态
         self.status = .loadingUserInfo
         debugPrint("*** 2. 获取用户信息",config)
-        
-        /// 更新配置
-        http.config = config
         
         /// 获取用户信息 用于启动数据库
         guard let _ = await self.getUserInfo() else {
@@ -128,9 +122,9 @@ extension ZWIMProvider {
     }
     
     /// 登录成功钩子
-    public func onLoginSuccess(_ config: IMConfig) {
+    public func onLoginSuccess() {
         Task{
-            await self.start(config)
+            await self.start()
         }
     }
 }

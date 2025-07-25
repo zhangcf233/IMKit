@@ -12,9 +12,7 @@ import Foundation
 ///   - domain: IM 服务地址（如 https://im.example.com）
 ///   - token: 用户身份令牌，IMKit 内部将通过 token 自动拉取用户信息
 ///   - enableDebugLog: 开启调试模式 将打印完整 log
-public struct IMConfig:IMConfigProtocol{
-    
-    
+public class IMConfig:IMConfigProtocol{
     // MARK: 初始化
     public init(
         _ url:String,
@@ -27,17 +25,20 @@ public struct IMConfig:IMConfigProtocol{
     }
     
     /// MARK: 请求地址
-    public let url:String
+    @Published
+    public var url:String
     
     /// MARK: token
+    @Published
     public var token:String
     
     /// MARK: 路由标记
-    public let routeFlag:String = UUID().uuidString
+    @Published
+    public var routeFlag:String = UUID().uuidString
     
     /// 调试模式
+    @Published
     public var isDebug:Bool
-    
 }
 
 

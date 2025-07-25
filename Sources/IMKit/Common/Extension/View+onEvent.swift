@@ -25,7 +25,6 @@ public struct onEventsModifier:ViewModifier{
     public func body(content: Content) -> some View {
         content
         .onReceive(NotificationCenter.default.publisher(for: name)){
-            debugPrint($0.object ?? "")
             done($0)
         }
     }
