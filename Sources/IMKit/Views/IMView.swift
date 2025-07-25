@@ -44,6 +44,7 @@ public struct IMView<P:IMProvider>: View {
             }
         }
         .useRoute(config.routeFlag)
+        
     }
     
     /// ios15 视图
@@ -102,7 +103,7 @@ public struct IMView<P:IMProvider>: View {
     var successView:some View {
         
         VStack{
-            Button("新增"){
+            Button("新增\(vm.mine.name)"){
                 vm.addSession()
             }
             
@@ -121,6 +122,8 @@ public struct IMView<P:IMProvider>: View {
                 ProgressView(vm.status.name)
             case .disconnected,.fail,.reconnect:
                 reconnectView
+            case .authFailed:
+                loginView
             default:
                 EmptyView()
             }
@@ -148,7 +151,7 @@ public struct IMView<P:IMProvider>: View {
     var debugMenuView:some View {
         Menu {
             
-            if vm.status == .success {
+            if vm.status == IMStatus.success {
                 Button(role: .destructive){
                     vm.provider.disconnect()
                 } label: {
@@ -175,6 +178,22 @@ public struct IMView<P:IMProvider>: View {
         } label: {
             Image(systemName: "ladybug")
             
+        }
+    }
+    
+    /// 登录页面
+    var loginView:some View{
+        VStack{
+            Image(systemName: "person.badge.shield.exclamationmark")
+                .font(.system(size: 100))
+                .foregroundStyle(.yellow)
+            
+            Text(vm.status.name)
+            
+            Button("重新登录") {
+                callEvent(.IM_OnAuthFailed)
+            }
+            .buttonStyle(.bordered)
         }
     }
 }

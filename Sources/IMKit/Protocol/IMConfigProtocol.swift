@@ -9,8 +9,10 @@ import Foundation
 
 /// 配置协议
 public protocol IMConfigProtocol {
-    /// 域名
+    /// 请求地址
     var url:String {get}
+    /// token
+    var token:String {get}
     /// 路由标记
     var routeFlag:String {get}
 }

@@ -26,8 +26,8 @@ class SignalRDelegate: HubConnectionDelegate {
     
     /// 连接失败
     func connectionDidFailToOpen(error: any Error) {
-        debugPrint("连接失败")
-        app.status = .fail
+        debugPrint("连接失败",error.localizedDescription)
+        app.status = .authFailed
     }
     
     /// 连接关闭
@@ -36,4 +36,13 @@ class SignalRDelegate: HubConnectionDelegate {
         app.status = .disconnected
     }
     
+    /// 重连中
+    func connectionWillReconnect(error: any Error) {
+        app.status = .reconnect
+    }
+
+    /// 重连成功
+    func connectionDidReconnect() {
+        app.status = .success
+    }
 }

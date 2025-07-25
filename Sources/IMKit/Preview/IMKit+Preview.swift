@@ -17,6 +17,8 @@ struct Test: View {
     
     let zwProvider = ZWIMProvider(DefaultIMConfig)
     
+    let zwAuthFailedProvider = ZWIMProvider(DefaultIMConfigAuthFailed)
+    
     var body: some View {
         NavigationView {
             TabView(selection: $select){
@@ -27,13 +29,17 @@ struct Test: View {
                         Text("首页")
                     }
 
-                IMView(mockProvider)
+                IMView(zwProvider)
                     .tag(1)
                     .tabItem{
                         Image(systemName: "text.bubble")
                         Text("消息")
                     }
                 
+            }
+            .onEvent(.IM_OnAuthFailed){ _ in
+                print("监听到登录失败 模拟重新登录")
+                zwAuthFailedProvider.onLoginSuccess(DefaultIMConfig)
             }
         }
     }

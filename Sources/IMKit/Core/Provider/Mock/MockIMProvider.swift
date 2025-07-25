@@ -11,6 +11,7 @@ import Foundation
 public final class MockIMProvider:BaseViewModel,IMProvider {
     
     
+    
     public init(_ config: IMConfig) {
         self.config = config
         self.name = "本地模拟"
@@ -18,11 +19,15 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
         self.connect()
     }
     
-    
     public init(_ config: IMConfig,name:String = "本地模拟") {
         self.config = config
         self.name = name
         super.init()
+        self.connect()
+    }
+    
+    public func onLoginSuccess(_ config: IMConfig) {
+        self.config = config
         self.connect()
     }
     
@@ -34,13 +39,18 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
     @Published
     public var status: IMStatus = .disconnected
     
+    @Published
+    public var mine: User = DefaultUser
+    
     public var store:WCDBService?
 }
 
 extension MockIMProvider {
     
     public func initDB(_ userId:String){
-        store = WCDBService(userId)
+        if store == nil {
+            store = WCDBService(userId)
+        }
     }
     
     public func connect() {
@@ -51,7 +61,7 @@ extension MockIMProvider {
         self.status = .disconnected
     }
     
-    public func getUserInfo()->User {
+    public func getUserInfo() async ->  User? {
         let user =  User(
             id: "mock.user",
             name: "模拟用户",

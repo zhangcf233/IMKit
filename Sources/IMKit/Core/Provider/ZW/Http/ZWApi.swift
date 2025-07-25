@@ -9,13 +9,16 @@ import Foundation
 import KakaJSON
 
 
-
 /// 请求的方法
-public enum ZWRequest:String {
+public enum ZWApi {
     
     /// 获取用户信息
     case getUserInfo
     
+}
+
+
+extension ZWApi {
     /// 请求路径
     var path:String {
         switch self {
@@ -25,7 +28,7 @@ public enum ZWRequest:String {
     }
     
     /// 返回值类型
-    var type:Convertible{
+    var responseType:Convertible{
         switch self {
         case .getUserInfo: ZWUserInfo.self as! Convertible
             

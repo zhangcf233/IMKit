@@ -13,17 +13,15 @@ class IMViewModel<P:IMProvider>:BaseViewModel {
     init(_ provider:P){
         self.provider = provider
         
-        /// 获取自己用户信息
-        self.mineInfo = provider.getUserInfo()
-        print("用户信息",mineInfo)
-        
         super.init()
         
         self.loadSessions()
     }
     
     /// 自己的用户信息
-    var mineInfo:User = DefaultUser
+    var mine:User{
+        return provider.mine
+    }
     
     /// 搜索
     @Published var searchConversion = ""

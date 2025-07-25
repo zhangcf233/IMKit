@@ -15,6 +15,7 @@ public enum IMStatus {
     case fail
     case reconnect
     case success
+    case authFailed
     
     var name:String {
         switch self {
@@ -28,6 +29,7 @@ public enum IMStatus {
             "连接失败"
         case .reconnect:
             "重连中..."
+        case .authFailed:"登录失效,请重新登录"
         }
     }
     
