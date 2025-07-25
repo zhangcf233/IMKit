@@ -25,6 +25,7 @@ public class SignalRService {
         connection = HubConnectionBuilder(url: url)
             .withHubConnectionDelegate(delegate: delegate)
             .withLogging(minLogLevel: isDebug ? .error : .error)
+            .withAutoReconnect()
             .build()
             
         /// 开启监听

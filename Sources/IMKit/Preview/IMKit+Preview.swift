@@ -30,7 +30,7 @@ struct Test: View {
                     }
 
 //                IMView(zwProvider)
-                IMView(zwAuthFailedProvider)
+                IMView(zwProvider)
                     .tag(1)
                     .tabItem{
                         Image(systemName: "text.bubble")
