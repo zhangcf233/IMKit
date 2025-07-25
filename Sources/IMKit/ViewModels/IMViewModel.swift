@@ -89,6 +89,8 @@ extension IMViewModel{
         if let index = sessions.firstIndex(where: { $0.id == c.id }) {
             withAnimation {
                 sessions[index].isTop.toggle()
+                
+                provider.store.addOrUpdate(.session, sessions)
             }
         }
     }

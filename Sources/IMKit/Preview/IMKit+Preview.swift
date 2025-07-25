@@ -15,9 +15,9 @@ struct Test: View {
     
     let mockProvider = MockIMProvider(DefaultIMConfig)
     
-//    let zwProvider = ZWIMProvider(DefaultIMConfig)
+    let zwProvider = ZWIMProvider(DefaultIMConfig)
     
-    let zwAuthFailedProvider = ZWIMProvider(DefaultIMConfigAuthFailed)
+//    let zwAuthFailedProvider = ZWIMProvider(DefaultIMConfigAuthFailed)
     
     var body: some View {
         NavigationView {
@@ -29,7 +29,7 @@ struct Test: View {
                         Text("首页")
                     }
 
-                IMView(zwAuthFailedProvider)
+                IMView(zwProvider)
                     .tag(1)
                     .tabItem{
                         Image(systemName: "text.bubble")
@@ -38,7 +38,7 @@ struct Test: View {
             }
             .onEvent(.IM_OnAuthFailed){ _ in
                 print("监听到登录失败 模拟重新登录")
-                zwAuthFailedProvider.onLoginSuccess(DefaultIMConfig)
+//                zwAuthFailedProvider.onLoginSuccess(DefaultIMConfig)
             }
         }
     }
