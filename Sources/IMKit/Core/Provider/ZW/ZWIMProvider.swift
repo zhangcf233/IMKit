@@ -21,7 +21,7 @@ public final class ZWIMProvider:BaseViewModel,IMProvider{
         
         super.init()
         
-        self.onLoginSuccess()
+        self.restart()
     }
     
     /// 数据库
@@ -87,7 +87,6 @@ extension ZWIMProvider {
     
     /// 发起连接
     public func connect() {
-        self.status = .connecting
         service?.start()
         
     }
@@ -116,13 +115,13 @@ extension ZWIMProvider {
     }
     
     /// 获取会话列表
-    public func getSession() -> [Session] {
+     func getSession() -> [Session] {
         debugPrint("*** 获取会话列表",store.dbName)
         return store.getObjects(.session) ?? []
     }
     
-    /// 登录成功钩子
-    public func onLoginSuccess() {
+    /// 重新启动
+    public func restart() {
         Task{
             await self.start()
         }

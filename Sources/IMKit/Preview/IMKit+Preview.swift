@@ -40,7 +40,7 @@ struct Test: View {
             .onEvent(.IM_OnAuthFailed){ _ in
                 print("监听到登录失败 模拟重新登录")
                 zwAuthFailedProvider.config.token = token
-                zwAuthFailedProvider.onLoginSuccess()
+                zwAuthFailedProvider.restart()
             }
         }
     }

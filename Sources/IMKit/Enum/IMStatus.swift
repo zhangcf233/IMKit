@@ -30,15 +30,16 @@ public enum IMStatus {
             "未连接"
         case .loadingUserInfo:
             "载入用户信息..."
-        case .connecting:
-            "连接中..."
-        case .success:
+        case .connecting: 
+            "建立连接中..."
+        case .success: 
             "连接成功"
-        case .fail:
+        case .fail: 
             "连接失败"
-        case .reconnect:
+        case .reconnect: 
             "重连中..."
-        case .authFailed:"登录失效,请重新登录"
+        case .authFailed:
+            "登录失效,请重新登录"
         }
     }
     

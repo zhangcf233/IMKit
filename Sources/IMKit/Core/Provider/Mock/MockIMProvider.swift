@@ -26,7 +26,7 @@ public final class MockIMProvider:BaseViewModel,IMProvider {
         self.connect()
     }
     
-    public func onLoginSuccess() {
+    public func restart() {
         self.connect()
     }
     

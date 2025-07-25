@@ -50,6 +50,7 @@ public class SignalRService {
     }
     
     func start(){
+        provider.status = .connecting
         connection.start()
     }
     

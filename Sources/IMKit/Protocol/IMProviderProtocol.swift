@@ -33,8 +33,8 @@ public protocol IMProvider:BaseErrorProtocol{
     /// 断开连接
     func disconnect()
     
-    /// 登录成功
-    func onLoginSuccess()
+    /// 重启
+    func restart()
     
     /// 获取用户信息
     func getUserInfo() async -> User?
